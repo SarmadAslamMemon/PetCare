@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Gradient Background -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_bg" />
+
+    <!-- Curvy Shape -->
+    <View
+        android:id="@+id/curvyShape"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="@drawable/curvybottom_bg"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Heading TextView -->
+    <TextView
+        android:id="@+id/communityHeadingText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="The Ultimate Pet Care Guide"
+        android:textColor="@color/primary_color"
+        android:textSize="22sp"
+        android:textStyle="bold"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/curvyShape" />
+
+    <!-- Description TextView -->
+
+    <!-- Lottie Animation View -->
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:letterSpacing="0.1"
+        android:lineSpacingExtra="2dp"
+        android:text="Give your pet the best life possible! From nutrition to wellness tips, we’ve got everything you need to keep your furry friend happy and healthy."
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/communityHeadingText"
+        app:layout_constraintVertical_bias="0.481" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toTopOf="@id/curvyShape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/welcome_lottie_2"
+        tools:ignore="MissingClass" />
+
+    <!-- Button inside the Curvy Shape -->
+    <Button
+        android:id="@+id/finishBtnThree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="16dp"
+        android:layout_marginHorizontal="24dp"
+        android:backgroundTint="@color/primary_color"
+        android:text="Finish"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/curvyShape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

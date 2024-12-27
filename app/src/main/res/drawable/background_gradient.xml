@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base Layer with Inverted Gradient -->
+    <item>
+        <shape>
+            <gradient
+                android:startColor="#FFE0E0"
+            android:endColor="#FF99AC"
+            android:angle="45" />
+        </shape>
+    </item>
+
+    <!-- Second Layer with Diagonal Gradient -->
+    <item>
+        <shape>
+            <gradient
+                android:startColor="#FF6A88"
+            android:endColor="#FF9A8B"
+            android:angle="135" />
+        </shape>
+    </item>
+
+    <!-- Pattern Overlay -->
+    <item>
+        <shape>
+            <bitmap
+                android:src="@drawable/pets_foot_ic"
+            android:tileMode="repeat" />
+        </shape>
+    </item>
+</layer-list>

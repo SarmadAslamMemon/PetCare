@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PetCare</string>
+    <string name="screen_three_desc">Pets are domesticated animals kept for companionship, love, and joy. They enrich our lives emotionally and require proper care, nutrition, and attention to thrive.</string>
+    <string name="screen_three_title">Unite with Fellow Pet Lovers</string>
+    <string name="screen_two_desc">Stay ahead of health issues with AI-powered disease detection.
+        Detect potential problems early and ensure your pet gets the care they deserve.</string>
+    <string name="screen_two_heading">AI at Your Pet’s Service</string>
+    <string name="screen_three_description">Join a vibrant community of pet lovers! Share stories, get advice,
+        and find the support you need to make every day a little brighter for you and your pet.</string>
+    <string name="screen_one_title">The Ultimate Pet Care Guide</string>
+    <string name="select_pet">Select Pet</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

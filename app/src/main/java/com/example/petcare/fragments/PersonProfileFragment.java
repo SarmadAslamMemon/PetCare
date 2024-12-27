@@ -19,8 +19,7 @@ public class PersonProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_person_profile, container, false);
 
 
-        
-        return view;
+        return inflater.inflate(R.layout.fragment_person_profile, container, false);
 
     }
 }

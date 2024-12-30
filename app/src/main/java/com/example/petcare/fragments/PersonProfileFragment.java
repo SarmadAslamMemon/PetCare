@@ -27,6 +27,7 @@ public class PersonProfileFragment extends Fragment {
 
         cardView = view.findViewById(R.id.addpetprofile);
 
+<<<<<<< HEAD
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,6 +37,8 @@ public class PersonProfileFragment extends Fragment {
         });
         
         return view;
+=======
+>>>>>>> 781b90f1129323adf9bcb36825e76b84d2612fde
 
     }
 }

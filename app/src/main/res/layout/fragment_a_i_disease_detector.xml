@@ -1,156 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.AIDiseaseDetectorFragment">
 
-    <!-- Main Container -->
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:text="AI Disease Detector"
+        android:textAlignment="center"
+        android:textColor="@color/primary_color"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Pet Age and Type -->
+    <TextView
+        android:id="@+id/petDetailsHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Pet Age and Type"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/petDetailsHeading">
 
-        <!-- Heading -->
-        <TextView
-            android:id="@+id/heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="AI Disease Detector"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="8dp" />
 
-        <!-- Pet Age and Type -->
-        <TextView
-            android:id="@+id/petDetailsHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pet Age and Type"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/petAge"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edt_text_background"
+            android:hint="Pet Age"
+            android:inputType="number"
+            android:padding="16dp"
+            android:textColorHint="@color/primary_color"
+            android:textSize="16sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
 
-            <!-- Pet Age -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/petAgeLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/petAgeEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Pet Age"
-                    android:background="@drawable/edt_text_background"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:contentDescription="Enter Pet Age" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Pet Type Dropdown -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/petTypeLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/petTypeDropdown"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Pet Type"
-                    android:background="@drawable/edt_text_background"
-                    android:inputType="none"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:contentDescription="Select Pet Type" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <!-- Pet Symptoms -->
-        <TextView
-            android:id="@+id/petSymptomsHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pet Symptoms"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
-
+        <!-- Pet Type Dropdown -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/petSymptomsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/petSymptomsEditText"
+            <AutoCompleteTextView
+                android:id="@+id/petTypeDropdown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Symptoms"
+                android:layout_height="match_parent"
                 android:background="@drawable/edt_text_background"
-                android:inputType="textMultiLine"
-                android:minLines="1"
-                android:contentDescription="Enter Pet Symptoms" />
+                android:clickable="true"
+                android:contentDescription="Select Pet Type"
+                android:hint="Pet Type"
+                android:inputType="none"
+                android:paddingStart="16dp"
+                android:textColorHint="@color/primary_color">
+
+            </AutoCompleteTextView>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Pet Breed -->
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/petSymptomsHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Pet Symptoms"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/edt_text_background"
+        android:inputType="textAutoComplete"
+        android:padding="16dp"
+        android:text="Enter Symptoms"
+        android:textColor="@color/secondary_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/petSymptomsHeading" />
+
+
+    <!-- Pet Breed -->
+    <TextView
+        android:id="@+id/petBreedHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Pet Breed"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/edt_text_background"
+        android:inputType="textAutoComplete"
+        android:padding="16dp"
+        android:text="Enter Pet Breed"
+        android:textColor="@color/secondary_color"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/petBreedHeading"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/diseaseSymptomHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Upload Disease Symptom Image"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diseaseSymptomHeading">
+
         <TextView
-            android:id="@+id/petBreedHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pet Breed"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Click here to Upload Image"
+            android:textColor="@color/primary_color"
+            android:textSize="16sp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/petBreedLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/petBreedEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Breed"
-                android:background="@drawable/edt_text_background"
-                android:inputType="text"
-                android:contentDescription="Enter Pet Breed" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Disease Symptom Image -->
-        <TextView
-            android:id="@+id/diseaseSymptomHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Disease Symptom Image"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="24dp" />
+        </TextView>
 
         <ImageView
             android:id="@+id/diseaseSymptomImage"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:src="@drawable/pet_profile_ic"
+            android:layout_height="match_parent"
             android:contentDescription="Disease Symptom Image"
             android:scaleType="centerCrop"
-            android:background="@color/primary_color" />
-    </LinearLayout>
-</FrameLayout>
+            tools:layout_editor_absoluteX="71dp"
+            tools:layout_editor_absoluteY="366dp" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:id="@+id/nextBtnOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="16dp"
+        android:backgroundTint="@color/primary_color"
+        android:text="Diagnose Disease"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

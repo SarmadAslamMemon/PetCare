@@ -8,6 +8,7 @@ public class Pet {
     private String petColor;
     private int petAge;
     private String petCategory;
+    private String petimage;
 
     // Constructor
     public Pet(String petId, String petName, String petColor, int petAge, String petCategory) {

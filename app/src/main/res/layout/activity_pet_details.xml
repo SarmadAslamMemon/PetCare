@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/app_background">
+    android:background="@drawable/app_background"
+    android:padding="16dp">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
@@ -15,8 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/pets_profile"
         app:lottie_loop="true"
+        app:lottie_rawRes="@raw/pets_profile"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -24,25 +24,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:paddingBottom="8dp"
+        app:hintAnimationEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView"
-        app:hintAnimationEnabled="false"
-        android:paddingBottom="8dp">
+        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/petNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edt_text_background"
+            android:contentDescription="Pet Name input field"
             android:hint="Enter Pet Name"
+            android:importantForAccessibility="yes"
             android:inputType="text"
             android:lines="1"
             android:maxLines="1"
-            android:importantForAccessibility="yes"
-            android:contentDescription="Pet Name input field"
             android:padding="12dp"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -50,25 +50,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:paddingBottom="8dp"
+        app:hintAnimationEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petNameLayout"
-        app:hintAnimationEnabled="false"
-        android:paddingBottom="8dp">
+        app:layout_constraintTop_toBottomOf="@+id/petNameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/petColorEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edt_text_background"
+            android:contentDescription="Pet Color input field"
             android:hint="Enter Pet Color"
+            android:importantForAccessibility="yes"
             android:inputType="text"
             android:lines="1"
             android:maxLines="1"
-            android:importantForAccessibility="yes"
-            android:contentDescription="Pet Color input field"
             android:padding="12dp"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -76,25 +76,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:paddingBottom="8dp"
+        app:hintAnimationEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petColorLayout"
-        app:hintAnimationEnabled="false"
-        android:paddingBottom="8dp">
+        app:layout_constraintTop_toBottomOf="@+id/petColorLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/petAgeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edt_text_background"
+            android:contentDescription="Pet Age input field"
             android:hint="Enter Pet Age"
+            android:importantForAccessibility="yes"
             android:inputType="number"
             android:lines="1"
             android:maxLines="1"
-            android:importantForAccessibility="yes"
-            android:contentDescription="Pet Age input field"
             android:padding="12dp"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -103,25 +103,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:paddingBottom="8dp"
         app:boxStrokeColor="#800000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petAgeLayout"
-        android:paddingBottom="8dp"
-     >
+        app:layout_constraintTop_toBottomOf="@+id/petAgeLayout">
 
         <AutoCompleteTextView
             android:id="@+id/petTypeAutoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawablePadding="10dp"
-            android:inputType="none"
             android:background="@drawable/edt_text_background"
-            android:textSize="16sp"
+            android:drawablePadding="10dp"
             android:hint="@string/select_pet"
-            android:padding="12dp"/>
+            android:inputType="none"
+            android:padding="12dp"
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
 
     <Button
@@ -129,15 +127,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginVertical="16dp"
         android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="16dp"
+        android:layout_marginTop="76dp"
         android:backgroundTint="@color/primary_color"
         android:text="Next"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:cornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/confirmPasswordLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/petTypeLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.example.petcare.Notification_Fragment;
 import com.example.petcare.R;
 import com.example.petcare.adapter.CorouselSliderAdapter;
 import com.example.petcare.modelclass.HealthTip;
@@ -34,6 +35,7 @@ public class DashBoardFragment extends Fragment {
 
     RecyclerView recyclerView;
     CardView healthTipCardView, petMealCardView, consulationCardView, aiDetectorCardView;
+    ImageView notificationIcon;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class DashBoardFragment extends Fragment {
 
     private void findViews(View view) {
         recyclerView = view.findViewById(R.id.recyclerCorouselView);
+        notificationIcon=view.findViewById(R.id.notificationIcon);
     }
 
     private void loadCorousel() {
@@ -79,6 +82,15 @@ public class DashBoardFragment extends Fragment {
         view.findViewById(R.id.petMealCardView).setOnClickListener(v -> loadFragment(new PetMealFragment()));
         view.findViewById(R.id.consulationCardView).setOnClickListener(v -> loadFragment(new CommunityFragment()));
         view.findViewById(R.id.aiDetectorCardView).setOnClickListener(v -> loadFragment(new AIDiseaseDetectorFragment()));
+        view.findViewById(R.id.notificationIcon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Notification_Fragment notificationFragment = new Notification_Fragment();
+                loadFragment(notificationFragment);
+            }
+        });
+
     }
 
     private void loadHealthTipsAlertDialogueBox() {

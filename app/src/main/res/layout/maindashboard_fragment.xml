@@ -61,10 +61,10 @@
     <!-- Cards Section -->
     <LinearLayout
         android:id="@+id/cardsSectionRowOne"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:padding="10dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/recyclerCorouselView"
@@ -73,9 +73,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/healthTipCardView"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
             app:cardCornerRadius="16dp"
+            app:cardElevation="10dp"
             android:layout_marginHorizontal="10dp"
             android:background="@drawable/bg_gradient">
 
@@ -106,9 +107,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/petMealCardView"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
             app:cardCornerRadius="16dp"
             android:background="@drawable/bg_gradient">
 
@@ -139,7 +140,7 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/cardsSectionRowTwo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="8dp"
@@ -151,9 +152,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/consulationCardView"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
             app:cardCornerRadius="16dp"
+            app:cardElevation="10dp"
             android:background="@drawable/bg_gradient">
 
             <LinearLayout
@@ -183,9 +185,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/aiDetectorCardView"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="25dp"
             app:cardCornerRadius="16dp"
             android:background="@drawable/bg_gradient">
 

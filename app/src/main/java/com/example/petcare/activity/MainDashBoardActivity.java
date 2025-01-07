@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -62,4 +63,30 @@ public class MainDashBoardActivity extends AppCompatActivity {
                 .replace(R.id.frameLayoutMainDashBoard, fragment)
                 .commit();
     }
+
+
+    @Override
+    public void onBackPressed() {
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.frameLayoutMainDashBoard); // Replace with your fragment container ID
+        if (!(currentFragment instanceof DashBoardFragment)) {
+            // Navigate to UserDashboardFragment
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frameLayoutMainDashBoard, new DashBoardFragment()) // Replace with your UserDashboardFragment instance
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            // Show a dialog to confirm quitting
+            new AlertDialog.Builder(this)
+                    .setTitle("Exit Application")
+                    .setMessage("Do you really want to quit?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        finish(); // Close the activity
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        dialog.dismiss(); // Dismiss the dialog
+                    })
+                    .show();
+        }
+    }
+
 }

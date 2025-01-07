@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DashBoardFragment extends Fragment {
+public class DashBoardFragment extends Fragment implements CorouselSliderAdapter.OnItemClickListener {
 
 
     RecyclerView recyclerView;
@@ -64,7 +65,7 @@ public class DashBoardFragment extends Fragment {
         imagesList.add("https://res.cloudinary.com/hzrulbrds/image/upload/v1582764036/benji_rkg884.jpg");
 
 
-        CorouselSliderAdapter adapter = new CorouselSliderAdapter(requireContext(), imagesList);
+        CorouselSliderAdapter adapter = new CorouselSliderAdapter(requireContext(), imagesList, this);
         recyclerView.setAdapter(adapter);
 
 
@@ -131,4 +132,15 @@ public class DashBoardFragment extends Fragment {
         ImageView aiDetectorGif = view.findViewById(R.id.imageViewAIDetectorGif);
         Glide.with(this).asGif().load(R.drawable.ai_driven_gif).into(aiDetectorGif);
     }
+
+    @Override
+    public void onClick(ImageView imageView, String path) {
+        Log.d("jarvis", "onClick: " + path);
+        loadFragment(new BlogFragment());
+
+    }
+
+
+
+
 }

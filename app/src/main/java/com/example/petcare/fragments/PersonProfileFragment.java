@@ -14,11 +14,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.petcare.PetDetailsActivity;
 import com.example.petcare.R;
 import com.example.petcare.utility.CameraUtils;
+import com.example.petcare.utility.SharePreference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -27,19 +30,25 @@ public class PersonProfileFragment extends Fragment {
 
 
     CardView cardView;
+    ImageView petImageViewUserProfile;
     CircleImageView personProfilePic;
+    TextView petName;
 
     private ActivityResultLauncher<Intent> cameraActivityResultLauncher;
     private ActivityResultLauncher<Intent> galleryActivityResultLauncher;
+
+    SharePreference sharePreference;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person_profile, container, false);
+        sharePreference = new SharePreference(requireContext());
 
 
         getViews(view);
+        setPetData();
 
 
         cardView.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +73,7 @@ public class PersonProfileFragment extends Fragment {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         if (data != null) {
-                            Bitmap photo = (Bitmap) data.getExtras().get("data");  // Get captured photo as Bitmap
+                            Bitmap photo = (Bitmap) data.getExtras().get("data");
                             personProfilePic.setImageBitmap(photo);  // Set photo to ImageView
                         }
                     } else {
@@ -98,15 +107,28 @@ public class PersonProfileFragment extends Fragment {
             }
         });
 
+
+
+        
+
+
         return view;
 
 
     }
 
-    private void getViews(View view) {
+    private void setPetData() {
+        Bitmap bitmap = sharePreference.getPetProfilePic();
+        petImageViewUserProfile.setImageBitmap(bitmap);
+        petName.setText(sharePreference.getUserPetName());
 
+    }
+
+    private void getViews(View view) {
         personProfilePic = view.findViewById(R.id.profilePicCardView);
         cardView = view.findViewById(R.id.addpetprofile);
+        petImageViewUserProfile = view.findViewById(R.id.petImageViewUserProfile);
+        petName = view.findViewById(R.id.petNameUserProfile);
 
     }
 }

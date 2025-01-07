@@ -1,5 +1,7 @@
 package com.example.petcare;
 
+import android.graphics.Bitmap;
+
 import com.example.petcare.modelclass.Doctor;
 import com.example.petcare.modelclass.HealthTip;
 
@@ -69,5 +71,6 @@ public static List<Doctor> getDoctors() {
 
     return Collections.unmodifiableList(doctors);
 }
+
 
 }

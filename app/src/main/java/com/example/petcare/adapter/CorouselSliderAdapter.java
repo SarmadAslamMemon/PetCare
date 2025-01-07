@@ -15,11 +15,14 @@ import java.util.ArrayList;
 public class CorouselSliderAdapter extends RecyclerView.Adapter<CorouselSliderAdapter.ViewHolder> {
     Context context;
     ArrayList<String> arrayList;
+
     OnItemClickListener onItemClickListener;
 
-    public CorouselSliderAdapter(Context context, ArrayList<String> arrayList) {
+    public CorouselSliderAdapter(Context context, ArrayList<String> arrayList,OnItemClickListener onItemClickListener) {
         this.context = context;
         this.arrayList = arrayList;
+        this.onItemClickListener = onItemClickListener;
+
     }
 
     @NonNull
@@ -33,7 +36,12 @@ public class CorouselSliderAdapter extends RecyclerView.Adapter<CorouselSliderAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context).load(arrayList.get(position)).into(holder.imageView);
 
-
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onClick(holder.imageView,arrayList.get(position));
+            }
+        });
     }
 
     @Override

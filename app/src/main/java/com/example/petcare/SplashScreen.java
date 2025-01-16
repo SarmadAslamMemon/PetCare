@@ -9,9 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieCompositionFactory;
+import com.example.petcare.activity.MainDashBoardActivity;
+import com.example.petcare.utility.SharePreference;
 
 public class SplashScreen extends AppCompatActivity {
 
+    SharePreference sharePreference;
 
 
     @Override
@@ -19,11 +22,18 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash_screen);
+        sharePreference = new SharePreference(this);
+
+
 
 
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(SplashScreen.this, WelcomeScreen.class));
-        }, 3000);
+            if(!sharePreference.getUserRegistered()) {
+                startActivity(new Intent(SplashScreen.this, WelcomeScreen.class));
+            }else{
+                startActivity(new Intent(SplashScreen.this, MainDashBoardActivity.class));
+            }
+            }, 3000);
     }
 
 }

@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.petcare.activity.MainDashBoardActivity;
+import com.example.petcare.modelclass.User;
+import com.example.petcare.utility.SharePreference;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,11 +27,16 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button finishButton;
     private TextInputLayout firstNameLayout, lastNameLayout, emailLayout, dobLayout, addressLayout, passwordLayout, confirmPasswordLayout;
 
+    SharePreference sharePreference;
+    boolean hasError=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up);
+
+        sharePreference = new SharePreference(this);
 
         // Initialize Views
         firstNameEditText = findViewById(R.id.firstNameEditText);
@@ -53,11 +60,24 @@ public class RegistrationActivity extends AppCompatActivity {
         dobEditText.setOnClickListener(view -> openDatePicker());
 
         // Finish button click listener
-//        finishButton.setOnClickListener(view -> validateForm());
-
         finishButton.setOnClickListener(v -> {
-            Intent intent = new Intent(RegistrationActivity.this, PetDetailsActivity.class);
-            startActivity(intent);
+            if (!validateForm()) {
+                Intent intent = new Intent(RegistrationActivity.this, MainDashBoardActivity.class);
+                startActivity(intent);
+                sharePreference.setUserRegistered(true);
+
+                User user = new User(
+                        String.valueOf(sharePreference.getPetCount()),
+                        "",
+                        firstNameEditText.getText().toString(),
+                        lastNameEditText.getText().toString(),
+                        emailEditText.getText().toString(),
+                        addressEditText.getText().toString(),
+                        dobEditText.getText().toString()
+                );
+
+                sharePreference.saveUserRegisteration(user);
+            }
         });
     }
 
@@ -79,103 +99,67 @@ public class RegistrationActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void validateForm() {
-        boolean hasError = false;
+    private boolean validateForm() {
 
 
+        String firstName, lastName, email, dob, address, password, confirmPassword;
+        firstName = firstNameEditText.getText().toString();
+        lastName = lastNameEditText.getText().toString();
+        email= emailEditText.getText().toString();
+        address =addressEditText.getText().toString();
+        password = passwordEditText.getText().toString();
+        confirmPassword = confirmPasswordEditText.getText().toString();
+        dob = dobEditText.getText().toString();
 
-        // Clear previous error messages
-        firstNameLayout.setError(null);
-        lastNameLayout.setError(null);
-        emailLayout.setError(null);
-        dobLayout.setError(null);
-        addressLayout.setError(null);
-        passwordLayout.setError(null);
-        confirmPasswordLayout.setError(null);
 
-        // First Name Validation
-        String firstName = firstNameEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(firstName)) {
+        if(TextUtils.isEmpty(firstName)){
             firstNameLayout.setError("First Name is required");
             hasError = true;
-        } else if (!firstName.matches("[a-zA-Z]+")) {
-            firstNameLayout.setError("Invalid First Name");
-            hasError = true;
-        } else if (firstName.length() < 3) {
-            firstNameLayout.setError("First Name must be at least 3 characters");
-            hasError = true;
-        } else if (firstName.length() > 20) {
-            firstNameLayout.setError("First Name cannot exceed 20 characters");
-            hasError = true;
-        }
-
-        // Last Name Validation
-        String lastName = lastNameEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(lastName)) {
+        } else if(TextUtils.isEmpty(lastName)){
+            firstNameLayout.setError(null);
             lastNameLayout.setError("Last Name is required");
             hasError = true;
-        } else if (!lastName.matches("[a-zA-Z]+")) {
-            lastNameLayout.setError("Invalid Last Name");
-            hasError = true;
-        } else if (lastName.length() < 3) {
-            lastNameLayout.setError("Last Name must be at least 3 characters");
-            hasError = true;
-        } else if (lastName.length() > 20) {
-            lastNameLayout.setError("Last Name cannot exceed 20 characters");
-            hasError = true;
-        }
-
-        // Email Validation
-        String email = emailEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(email)) {
-            emailLayout.setError("Email Address is required");
+        } else if (TextUtils.isEmpty(email)) {
+            lastNameLayout.setError(null);
+            emailLayout.setError("Email is required");
             hasError = true;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailLayout.setError("Enter a valid email address");
+            emailLayout.setError("Invalid email address");
             hasError = true;
-        }
-
-        // Date of Birth Validation
-        String dob = dobEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(dob)) {
+        }else if (TextUtils.isEmpty(dob)) {
+            emailLayout.setError(null);
             dobLayout.setError("Date of Birth is required");
             hasError = true;
-        }
-
-        // Address Validation
-        String address = addressEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(address)) {
+        } else if (TextUtils.isEmpty(address)) {
+            dobLayout.setError(null);
             addressLayout.setError("Address is required");
             hasError = true;
-        }
-
-        // Password Validation
-        String password = passwordEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(password)) {
+        } else if (TextUtils.isEmpty(password)) {
+            addressLayout.setError(null);
             passwordLayout.setError("Password is required");
             hasError = true;
-        } else if (password.length() < 6) {
-            passwordLayout.setError("Password must be at least 6 characters");
-            hasError = true;
-        }
-
-        // Confirm Password Validation
-        String confirmPassword = confirmPasswordEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(confirmPassword)) {
+        } else if (TextUtils.isEmpty(confirmPassword)) {
+            passwordLayout.setError(null);
             confirmPasswordLayout.setError("Confirm Password is required");
             hasError = true;
-        } else if (!password.equals(confirmPassword)) {
+        } else if (password.length() < 6){
+            confirmPasswordLayout.setError("Password must be at least 6 characters long");
+            hasError = true;
+        } else if (!password.equals(confirmPassword)){
             confirmPasswordLayout.setError("Passwords do not match");
             hasError = true;
+        } else{
+            firstNameLayout.setError(null);
+            lastNameLayout.setError(null);
+            emailLayout.setError(null);
+            dobLayout.setError(null);
+            addressLayout.setError(null);
+            passwordLayout.setError(null);
+            confirmPasswordLayout.setError(null);
+            hasError = false;
+
         }
 
-        // If there's any error, show a Snackbar message
-        if (hasError) {
-            Snackbar.make(finishButton, "Please fix the errors above", Snackbar.LENGTH_LONG).show();
-        } else {
-            // If no error, show a success Snackbar
-            Snackbar.make(finishButton, "Registration Successful!", Snackbar.LENGTH_SHORT).show();
-        }
+        return hasError;
     }
-
 }

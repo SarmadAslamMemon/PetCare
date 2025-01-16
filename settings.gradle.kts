@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PetCare"
+rootProject.name = "SmartPaw"
 include(":app")
  

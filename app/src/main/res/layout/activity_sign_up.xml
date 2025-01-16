@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/bg_gradient">
+    android:background="@drawable/app_background">
 
     <!-- Signup Title -->
     <com.airbnb.lottie.LottieAnimationView
@@ -41,8 +41,6 @@
             android:inputType="textPersonName"
             android:lines="1"
             android:maxLines="1"
-            android:importantForAccessibility="yes"
-
             android:contentDescription="First Name input field"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +65,6 @@
             android:inputType="textPersonName"
             android:lines="1"
             android:maxLines="1"
-            android:importantForAccessibility="yes"
             android:contentDescription="Last Name input field"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,7 +116,10 @@
             android:inputType="datetime"
             android:lines="1"
             android:maxLines="1"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:importantForAccessibility="yes"
+            android:clickable="true"
             android:cursorVisible="false"
             android:contentDescription="Date of Birth input field"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -168,6 +168,7 @@
             android:layout_weight="1"
             android:layout_marginEnd="4dp"
             app:hintAnimationEnabled="false"
+            app:passwordToggleEnabled="true"
             android:paddingBottom="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -191,6 +192,7 @@
             android:layout_weight="1"
             android:layout_marginStart="5dp"
             app:hintAnimationEnabled="false"
+            app:passwordToggleEnabled="true"
             android:paddingBottom="8dp">
 
             <com.google.android.material.textfield.TextInputEditText

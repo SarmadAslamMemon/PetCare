@@ -79,7 +79,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/healthTipCardView"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="120dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="12dp"
@@ -113,7 +113,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/petMealCardView"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="16dp"
                 app:cardCornerRadius="16dp"
@@ -157,7 +157,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/consulationCardView"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="120dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="12dp"
@@ -190,7 +190,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/aiDetectorCardView"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="25dp"
                 app:cardCornerRadius="16dp"

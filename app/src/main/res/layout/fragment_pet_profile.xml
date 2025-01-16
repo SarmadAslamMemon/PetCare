@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragments.PetProfileFragment">
 
     <!-- Pet Profile Title at the top with margin -->
@@ -32,7 +33,6 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
@@ -51,18 +51,19 @@
         app:layout_constraintTop_toBottomOf="@+id/profilePicCardView">
 
         <EditText
-            android:id="@+id/firstNameTextView"
+            android:id="@+id/petNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edt_text_background"
             android:drawableEnd="@drawable/pen_edit_svg"
             android:padding="16dp"
+            android:inputType="textPersonName"
             android:text="Pet Name"
             android:textColor="@color/secondary_color"
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/usernameTextView"
+            android:id="@+id/petBreedTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -74,25 +75,28 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/emailTextView"
+            android:id="@+id/petAgeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@drawable/edt_text_background"
             android:drawableEnd="@drawable/pen_edit_svg"
             android:padding="16dp"
+            android:maxLength="2"
+            android:inputType="number"
             android:text="Age"
             android:textColor="@color/secondary_color"
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/dobTextView"
+            android:id="@+id/petFavFoodTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@drawable/edt_text_background"
             android:drawableEnd="@drawable/pen_edit_svg"
             android:padding="16dp"
+            android:inputType="textAutoComplete"
             android:text="Favourite Food"
             android:textColor="@color/secondary_color"
             android:textSize="16sp" />
@@ -104,6 +108,8 @@
             android:text="Select Gender of Pet"
             android:textColor="@color/secondary_color"
             android:textSize="16sp" />
+
+
 
         <!-- Gender Radio Buttons -->
         <RadioGroup
@@ -147,7 +153,6 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginVertical="16dp"
         android:backgroundTint="@color/primary_color"
-        android:text="Update"
         android:textSize="16sp"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"

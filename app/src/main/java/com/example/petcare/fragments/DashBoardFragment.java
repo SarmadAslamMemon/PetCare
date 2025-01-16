@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RawRes;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,12 +22,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.example.petcare.GeneralClass;
 import com.example.petcare.Notification_Fragment;
 import com.example.petcare.R;
 import com.example.petcare.adapter.CorouselSliderAdapter;
+import com.example.petcare.modelclass.Blog;
 import com.example.petcare.modelclass.HealthTip;
 import com.example.petcare.utility.SharePreference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,18 +40,21 @@ public class DashBoardFragment extends Fragment implements CorouselSliderAdapter
 
     RecyclerView recyclerView;
     CardView healthTipCardView, petMealCardView, consulationCardView, aiDetectorCardView;
-    ImageView notificationIcon;
+    ImageView notificationIcon,personProfilePic;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.maindashboard_fragment, container, false);
 
-
-
         findViews(view);
         setupCardListeners(view);
         loadGifImages(view);
         loadCorousel();
+
+
+        personProfilePic.setOnClickListener(v -> loadFragment(new PersonProfileFragment()));
+
 
         return view;
     }
@@ -55,28 +62,30 @@ public class DashBoardFragment extends Fragment implements CorouselSliderAdapter
     private void findViews(View view) {
         recyclerView = view.findViewById(R.id.recyclerCorouselView);
         notificationIcon=view.findViewById(R.id.notificationIcon);
+        personProfilePic=view.findViewById(R.id.profileIcDashBoardImageView);
     }
 
     private void loadCorousel() {
-        ArrayList<String> imagesList = new ArrayList<>();
-        imagesList.add("https://learnwebcode.github.io/json-example/images/cat-2.jpg");
-        imagesList.add("https://learnwebcode.github.io/json-example/images/dog-1.jpg");
-        imagesList.add("https://learnwebcode.github.io/json-example/images/cat-1.jpg");
-        imagesList.add("https://res.cloudinary.com/hzrulbrds/image/upload/v1582764036/benji_rkg884.jpg");
+        List<Blog> blogsList = new ArrayList<>();
+       blogsList =GeneralClass.getBlogs();
 
-
-        CorouselSliderAdapter adapter = new CorouselSliderAdapter(requireContext(), imagesList, this);
+        CorouselSliderAdapter adapter = new CorouselSliderAdapter(requireContext(), (ArrayList<Blog>) blogsList, this);
         recyclerView.setAdapter(adapter);
-
-
     }
 
     public void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+        // Replace the current fragment with the new one
         fragmentTransaction.replace(R.id.frameLayoutMainDashBoard, fragment);
+
+        // Commit the transaction
         fragmentTransaction.commit();
     }
+
 
     private void setupCardListeners(View view) {
         view.findViewById(R.id.healthTipCardView).setOnClickListener(v -> loadHealthTipsAlertDialogueBox());
@@ -134,13 +143,20 @@ public class DashBoardFragment extends Fragment implements CorouselSliderAdapter
     }
 
     @Override
-    public void onClick(ImageView imageView, String path) {
-        Log.d("jarvis", "onClick: " + path);
-        loadFragment(new BlogFragment());
+    public void onClick(ImageView imageView, Blog blog) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("blog",  blog);
+        BlogFragment fragment = new BlogFragment();
+        fragment.setArguments(bundle);
+        loadFragment(fragment);
+
+
+
 
     }
-
-
-
-
 }
+
+
+
+
+

@@ -5,11 +5,17 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 import com.example.petcare.GeneralClass;
 import com.example.petcare.modelclass.HealthTip;
+import com.example.petcare.modelclass.Pet;
+import com.example.petcare.modelclass.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -22,6 +28,8 @@ public class SharePreference {
 
     private static final String PET_NAME = "pet_name";
     private static final String PET_IMAGE = "pet_image";
+    private static final String USER_PETS_LIST = "user_pets_list";
+    private static final String PET_COUNT = "pet_count";
 
     // Private constructor to prevent instantiation
     public SharePreference(Context context) {
@@ -83,8 +91,8 @@ public class SharePreference {
     public void saveUserPetName(String petName) {
         editor.putString(PET_NAME, petName);
         editor.apply();
-
     }
+
     public String getUserPetName() {
         return sharedPreferences.getString(PET_NAME, null);
     }
@@ -94,43 +102,112 @@ public class SharePreference {
         editor.apply();
     }
 
-    // Save a Bitmap image as a Base64 encoded string
-    public void savePetProfilePic(Bitmap bitmap) {
-        if (bitmap != null) {
-            String bitmapString = bitmapToString(bitmap);
-            editor.putString(PET_IMAGE, bitmapString);
-            editor.apply();
-        } else {
-            editor.remove(PET_IMAGE);
-            editor.apply();
-        }
+    // Save image path to SharedPreferences
+    public void saveImagePathToSharedPreferences(String absolutePath) {
+        editor.putString(PET_IMAGE, absolutePath);
+        editor.apply();
     }
 
-    // Retrieve a Bitmap image from the Base64 encoded string
+    // Retrieve pet profile picture as Bitmap
     public Bitmap getPetProfilePic() {
-        String bitmapString = sharedPreferences.getString(PET_IMAGE, null);
-        if (bitmapString != null) {
-            return stringToBitmap(bitmapString);
+        String imagePath = sharedPreferences.getString(PET_IMAGE, null);
+        if (imagePath != null) {
+            File imageFile = new File(imagePath);
+            Log.d("SharePreference", "getPetProfilePic: " + imagePath);
+            if (imageFile.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+                if (bitmap != null) {
+                    return bitmap; // Return the decoded Bitmap
+                }
+            }
         }
         return null;
     }
 
-    // Utility method to convert Bitmap to Base64 encoded string
-    private String bitmapToString(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    // Save a single pet
+    public void savePet(Pet pet) {
+        List<Pet> pets = getUserStoredPets();
+        if (pets == null) {
+            pets = new ArrayList<>();
+            pets.add(pet);
+            Log.d("jarvis","Check Pets size before"+pets.size());
+            savePets(pets);
+        }else{
+            pets.add(pet);
+            Log.d("jarvis","Check Pets size after"+pets.size());
+        }
+
     }
 
-    // Utility method to convert Base64 encoded string to Bitmap
-    private Bitmap stringToBitmap(String encodedString) {
-        try {
-            byte[] decodedBytes = Base64.decode(encodedString, Base64.DEFAULT);
-            return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    // Save list of pets to SharedPreferences
+    private void savePets(List<Pet> pets) {
+        Gson gson = new Gson();
+        String json = gson.toJson(pets);
+        editor.putString(USER_PETS_LIST, json); // Store JSON string in SharedPreferences
+        editor.apply();
     }
+
+    // Get a pet by its ID
+    public Pet getPetById(int petId) {
+        List<Pet> pets = getUserStoredPets();
+        if (pets != null) {
+            for (Pet pet : pets) {
+                if (pet.getPetId()== petId) {
+                    return pet;
+                }
+            }
+        }
+        return null;
+    }
+
+    // Get the list of all stored pets
+    private List<Pet> getUserStoredPets() {
+        String petsJson = sharedPreferences.getString(USER_PETS_LIST, null);
+        if (petsJson != null) {
+            Gson gson = new Gson();
+            TypeToken<List<Pet>> token = new TypeToken<List<Pet>>() {};
+            return gson.fromJson(petsJson, token.getType());
+        }
+        return new ArrayList<>();
+    }
+
+    public int getPetCount(){
+        return getInt(PET_COUNT,0);
+    }
+
+    public void addPetCount() {
+        int count = getInt(PET_COUNT, 0);
+        count++;
+        editor.putInt(PET_COUNT, count);
+        editor.apply();
+
+
+    }
+
+    public void setUserRegistered(boolean b) {
+        editor.putBoolean("userRegistered", b);
+        editor.apply();
+    }
+
+    public boolean getUserRegistered() {
+        return getBoolean("userRegistered", false);
+    }
+
+    public void saveUserRegisteration(User user) {
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        editor.putString("user", json);
+        editor.apply();
+    }
+    public User getUserRegisteration() {
+        String json = sharedPreferences.getString("user", null);
+        if (json != null) {
+            Gson gson = new Gson();
+            return gson.fromJson(json, User.class);
+        }
+        return null;
+
+
+    }
+
 }

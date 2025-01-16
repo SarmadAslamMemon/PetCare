@@ -2,6 +2,7 @@ package com.example.petcare;
 
 import android.graphics.Bitmap;
 
+import com.example.petcare.modelclass.Blog;
 import com.example.petcare.modelclass.Doctor;
 import com.example.petcare.modelclass.HealthTip;
 
@@ -72,5 +73,59 @@ public static List<Doctor> getDoctors() {
     return Collections.unmodifiableList(doctors);
 }
 
+
+    public static List<Blog> getBlogs() {
+        List<Blog> blogs = new ArrayList<>();
+
+        // Adding static blogs to the list with HTML-formatted content
+        blogs.add(new Blog(1, 1, 1, "Best Meal Times for Pets",
+                "<b>As a pet owner, it’s essential to establish a consistent feeding routine for your pets.</b> This helps maintain their health, regulates their digestion, and establishes a sense of security. Here’s why meal timing matters for pets:<br>" +
+                        "- <b>Establishes a routine:</b> Pets thrive on routines, and regular meal times help create a predictable environment.<br>" +
+                        "- <b>Supports digestion:</b> Feeding your pets at the same time each day helps regulate their digestive system and reduce gastrointestinal issues.<br>" +
+                        "- <b>Energy levels:</b> Pets need energy throughout the day, and meal times ensure they have enough fuel for activity.<br>" +
+                        "- <b>Best times to feed pets:</b> <br>" +
+                        "    - <b>Dogs:</b> Ideally fed in the morning and evening to prevent long periods of hunger. It also helps with digestion and reduces the chance of obesity.<br>" +
+                        "    - <b>Cats:</b> Cats prefer smaller meals throughout the day. You can feed them several times per day or leave food out for them to graze.<br>" +
+                        "- <b>Avoid feeding before bedtime:</b> Feeding your pets right before they go to sleep can cause digestive discomfort, bloating, or even vomiting.<br>" +
+                        "- <b>Fresh water is essential:</b> Always ensure that your pets have access to fresh water, especially between meals.<br>" +
+                        "By maintaining these meal timings, you’re helping your pet stay healthier, happier, and more energetic throughout their day."));
+
+        blogs.add(new Blog(2, 2, 2, "Healthy Food for Birds",
+                "<b>Birds have unique dietary needs, and it's crucial to feed them a balanced diet to ensure they stay healthy and vibrant.</b> Here are some key tips on feeding birds:<br>" +
+                        "- <b>Diverse diet for optimal health:</b> Birds need a mix of seeds, fruits, vegetables, and protein to stay healthy. A varied diet prevents boredom and supports mental stimulation.<br>" +
+                        "- <b>Types of food to offer:</b><br>" +
+                        "    - <b>Seeds:</b> Sunflower seeds, safflower, and millet are good for most birds but should be fed in moderation.<br>" +
+                        "    - <b>Fruits:</b> Offer fruits like apples, bananas, oranges, grapes, and berries. Make sure to remove any seeds from fruits like apples or peaches.<br>" +
+                        "    - <b>Vegetables:</b> Leafy greens (spinach, kale, collard greens) are excellent. You can also feed them broccoli, carrots, and bell peppers.<br>" +
+                        "    - <b>Proteins:</b> Birds also need protein to stay strong. You can give them small amounts of cooked eggs, beans, or tofu.<br>" +
+                        "- <b>Avoid harmful foods:</b> Some foods are toxic to birds. Never feed birds chocolate, avocado, alcohol, caffeine, or high-fat foods like fried foods.<br>" +
+                        "- <b>Fresh water:</b> Birds need access to clean, fresh water at all times. Make sure to change their water daily.<br>" +
+                        "- <b>Grain-based food:</b> Birds love grain-based foods like whole grains and oat flakes. These foods are rich in fiber and help with digestion.<br>" +
+                        "A balanced diet keeps your bird active, happy, and healthy, and provides them with the necessary nutrients for a long life."));
+
+        blogs.add(new Blog(3, 3, 3, "Most Common Diseases in Cats",
+                "<b>Cats are generally independent and resilient, but they are prone to certain diseases.</b> Early detection and regular veterinary care can help prevent or manage these conditions. Below are some of the most common diseases in cats:<br>" +
+                        "- <b>Feline Upper Respiratory Infection (URI):</b> A viral or bacterial infection that affects a cat’s nose, sinuses, and throat. Symptoms include sneezing, coughing, nasal discharge, and loss of appetite.<br>" +
+                        "- <b>Feline Leukemia Virus (FeLV):</b> A serious viral disease that weakens the immune system, leaving the cat vulnerable to other infections. FeLV is transmitted through saliva, blood, or urine, and it can cause lethargy, weight loss, and anemia.<br>" +
+                        "- <b>Chronic Kidney Disease (CKD):</b> A common disease in older cats, where the kidneys gradually lose function. Symptoms include excessive thirst, weight loss, vomiting, and a decrease in appetite.<br>" +
+                        "- <b>Hyperthyroidism:</b> A condition in which the thyroid gland produces excessive hormones, leading to weight loss, increased appetite, and hyperactivity.<br>" +
+                        "- <b>Dental Disease:</b> Cats can suffer from dental issues, including gum disease and tooth decay, leading to bad breath, drooling, and difficulty eating.<br>" +
+                        "- <b>Arthritis:</b> Common in older cats, arthritis causes joint pain, stiffness, and difficulty jumping or climbing.<br>" +
+                        "Preventing these diseases includes vaccinations, regular vet checkups, a balanced diet, and ensuring your cat is kept indoors to avoid infections. Regular checkups with your vet can help diagnose problems early, improving the chances of successful treatment."));
+
+        blogs.add(new Blog(4, 4, 4, "Pet Care Health Tip: Regular Exercise for Dogs",
+                "<b>Physical activity is essential for dogs to maintain a healthy weight, reduce stress, and prevent behavioral issues.</b> Here's why regular exercise is vital for dogs and how you can keep them active:<br>" +
+                        "- <b>Prevents obesity:</b> Without proper exercise, dogs can easily become overweight, which increases the risk of serious health problems like heart disease, diabetes, and joint issues.<br>" +
+                        "- <b>Improves behavior:</b> Dogs that don’t get enough exercise can become anxious, destructive, or hyperactive. Regular walks or playtime help them release excess energy, leading to a calmer, happier dog.<br>" +
+                        "- <b>Strengthens muscles and joints:</b> Regular exercise keeps your dog’s muscles strong and improves their flexibility, reducing the risk of arthritis and joint pain.<br>" +
+                        "- <b>Mental stimulation:</b> Exercise isn’t just about physical activity; it’s also about engaging their minds. Walking in new areas, playing games like fetch, or using interactive toys helps mentally stimulate your dog.<br>" +
+                        "- <b>How much exercise does your dog need?</b><br>" +
+                        "    - <b>Small dogs:</b> Require about 30 minutes to an hour of exercise per day.<br>" +
+                        "    - <b>Large or high-energy dogs:</b> May need an hour or more of exercise, including vigorous activities like running or playing.<br>" +
+                        "- <b>Types of exercise:</b> Consider walks, jogs, hikes, fetch, tug-of-war, and dog sports. Agility training or swimming are great options too.<br>" +
+                        "Ensuring your dog gets enough exercise every day will keep them healthy, fit, and mentally stimulated. Regular exercise also strengthens the bond between you and your pet, promoting a positive relationship."));
+
+        return blogs;
+    }
 
 }

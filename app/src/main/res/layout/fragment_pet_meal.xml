@@ -45,7 +45,7 @@
             android:id="@+id/catNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cat Name: Whiskers"
+            android:text=""
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/petMealTitleImage"

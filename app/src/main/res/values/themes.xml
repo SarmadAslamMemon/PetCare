@@ -6,6 +6,7 @@
         <item name="fontFamily">Lora</item>
         <item name="hintAnimationEnabled">false</item>
         <item name="hintEnabled">false</item>
+        <item name="android:forceDarkAllowed">false</item>
 
     </style>
 

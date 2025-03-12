@@ -4,14 +4,19 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.petcare.activity.MainDashBoardActivity;
 import com.example.petcare.modelclass.User;
+import com.example.petcare.modelclass.UserRegisterRequest;
+import com.example.petcare.network.ApiService;
+import com.example.petcare.network.RetrofitClient;
 import com.example.petcare.utility.SharePreference;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -20,6 +25,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -61,23 +71,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Finish button click listener
         finishButton.setOnClickListener(v -> {
-            if (!validateForm()) {
-                Intent intent = new Intent(RegistrationActivity.this, MainDashBoardActivity.class);
-                startActivity(intent);
-                sharePreference.setUserRegistered(true);
-
-                User user = new User(
-                        String.valueOf(sharePreference.getPetCount()),
-                        "",
-                        firstNameEditText.getText().toString(),
-                        lastNameEditText.getText().toString(),
-                        emailEditText.getText().toString(),
-                        addressEditText.getText().toString(),
-                        dobEditText.getText().toString()
-                );
-
-                sharePreference.saveUserRegisteration(user);
-            }
+            validateForm();
         });
     }
 
@@ -110,6 +104,7 @@ public class RegistrationActivity extends AppCompatActivity {
         password = passwordEditText.getText().toString();
         confirmPassword = confirmPasswordEditText.getText().toString();
         dob = dobEditText.getText().toString();
+        UserRegisterRequest userRegisterRequest= new UserRegisterRequest(firstName,lastName,address,"","",email,password);
 
 
         if(TextUtils.isEmpty(firstName)){
@@ -158,8 +153,36 @@ public class RegistrationActivity extends AppCompatActivity {
             confirmPasswordLayout.setError(null);
             hasError = false;
 
+            callRegistrationApi(userRegisterRequest);
+
         }
 
         return hasError;
+    }
+
+    private void callRegistrationApi(UserRegisterRequest userRegisterRequest) {
+        Log.w("API_RESPONSE", "Registration API Called "+userRegisterRequest);
+        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+
+        apiService.registerUser(userRegisterRequest).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Intent intent = new Intent(RegistrationActivity.this, MainDashBoardActivity.class);
+                    startActivity(intent);
+                    sharePreference.setUserRegistered(true);
+                    Snackbar.make(findViewById(android.R.id.content), "Registration Successful", Snackbar.LENGTH_SHORT).show();
+
+                } else {
+                    Snackbar.make(findViewById(android.R.id.content), "Registration Failed", Snackbar.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Snackbar.make(findViewById(android.R.id.content), "Registration Failed", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

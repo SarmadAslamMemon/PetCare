@@ -23,16 +23,23 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ui.login.LoginActivity"
+            android:exported="true"
+            android:label="@string/title_activity_login" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".PetTypes"
             android:exported="false" />
         <activity
             android:name=".activity.MainDashBoardActivity"
-            android:exported="true">
-
-
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity android:name=".PetDetailsActivity" />
         <activity
             android:name=".RegistrationActivity"
@@ -41,17 +48,8 @@
             android:name=".WelcomeScreen"
             android:exported="false" />
         <activity
-
             android:name=".SplashScreen"
             android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
 
         </activity>
     </application>

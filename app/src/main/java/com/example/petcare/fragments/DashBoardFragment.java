@@ -90,7 +90,7 @@ public class DashBoardFragment extends Fragment implements CorouselSliderAdapter
     private void setupCardListeners(View view) {
         view.findViewById(R.id.healthTipCardView).setOnClickListener(v -> loadHealthTipsAlertDialogueBox());
         view.findViewById(R.id.petMealCardView).setOnClickListener(v -> loadFragment(new PetMealFragment()));
-        view.findViewById(R.id.consulationCardView).setOnClickListener(v -> loadFragment(new CommunityFragment()));
+        view.findViewById(R.id.consultationCardView).setOnClickListener(v -> loadFragment(new CommunityFragment()));
         view.findViewById(R.id.aiDetectorCardView).setOnClickListener(v -> loadFragment(new AIDiseaseDetectorFragment()));
         view.findViewById(R.id.notificationIcon).setOnClickListener(new View.OnClickListener() {
             @Override

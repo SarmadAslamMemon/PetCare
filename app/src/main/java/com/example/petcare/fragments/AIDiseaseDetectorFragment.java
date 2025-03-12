@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Half;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,6 +26,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.petcare.R;
 import com.example.petcare.utility.CameraUtils;
+import com.example.petcare.utility.ProgressDialogUtil;
 
 public class AIDiseaseDetectorFragment extends Fragment {
 
@@ -30,6 +34,7 @@ public class AIDiseaseDetectorFragment extends Fragment {
     private CardView cardView;
     private EditText editText;
     private AutoCompleteTextView autoCompleteTextView;
+    private Button updateButton;
 
     // List of pet types to be displayed in AutoCompleteTextView
     String[] petType = {"Dog", "Cat", "Bird", "Fish", "Rabbit"};
@@ -52,6 +57,19 @@ public class AIDiseaseDetectorFragment extends Fragment {
         cardView = view.findViewById(R.id.cardView);
         editText = view.findViewById(R.id.petAge);
         autoCompleteTextView = view.findViewById(R.id.petTypeDropdown);
+        updateButton = view.findViewById(R.id.checkDiseaseButton);
+
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ProgressDialogUtil.showProgressBar(requireContext(),true);
+
+
+                new Handler().postDelayed(() -> ProgressDialogUtil.showProgressBar(requireContext(),false),2500);
+            }
+        });
 
         // Set up AutoCompleteTextView for pet types
         arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.activity_pet_types, petType);

@@ -86,10 +86,10 @@ public class PersonProfileFragment extends Fragment {
 
 
 
-        cardView.setOnClickListener(view2 -> {
-            Intent i = new Intent(getActivity(), PetDetailsActivity.class);
-            startActivity(i);
-        });
+//        cardView.setOnClickListener(view2 -> {
+//            Intent i = new Intent(getActivity(), PetDetailsActivity.class);
+//            startActivity(i);
+//        });
 
 
 
@@ -204,10 +204,10 @@ public class PersonProfileFragment extends Fragment {
 
     private void getViews(View view) {
         personProfilePic = view.findViewById(R.id.profilePicCardView);
-        cardView = view.findViewById(R.id.addPetProfile);
-        petImageViewUserProfile = view.findViewById(R.id.petImageViewUserProfile);
-        petName = view.findViewById(R.id.petNameUserProfile);
-        addPetLinearLayout = view.findViewById(R.id.addPetCard);
+//        cardView = view.findViewById(R.id.addPetProfile);
+//        petImageViewUserProfile = view.findViewById(R.id.petImageViewUserProfile);
+//        petName = view.findViewById(R.id.petNameUserProfile);
+//        addPetLinearLayout = view.findViewById(R.id.addPetCard);
 
     }
 }

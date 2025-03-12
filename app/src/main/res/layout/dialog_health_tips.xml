@@ -12,33 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
         android:backgroundTint="@android:color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="16dp">
 
-            <!-- Close Icon -->
             <ImageView
                 android:id="@+id/closeIcon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
                 android:src="@drawable/close_ic"
                 app:tint="@color/primary_color"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <!-- Lottie Animation -->
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottieTitleAnimation"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
                 android:layout_marginTop="16dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -47,7 +45,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Title Text -->
             <TextView
                 android:id="@+id/titleTextView"
                 android:layout_width="wrap_content"
@@ -59,9 +56,9 @@
                 app:layout_constraintTop_toBottomOf="@id/lottieTitleAnimation"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+                android:layout_marginVertical="8dp" />
 
-            <!-- Divider -->
+            <!-- Separator between title and description -->
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -69,10 +66,8 @@
                 app:layout_constraintTop_toBottomOf="@id/titleTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/descriptionTextView"
-                android:layout_marginVertical="8dp"/>
+                android:layout_marginBottom="8dp"/>
 
-            <!-- Description Text -->
             <TextView
                 android:id="@+id/descriptionTextView"
                 android:layout_width="0dp"
@@ -86,6 +81,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="6dp"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Separator between description and next section -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/descriptionTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="8dp"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

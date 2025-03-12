@@ -110,7 +110,7 @@
         android:background="@drawable/edt_text_background"
         android:inputType="textAutoComplete"
         android:padding="16dp"
-        android:text="Enter Symptoms"
+        android:hint="Enter Symptoms"
         android:textColor="@color/secondary_color"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +142,7 @@
         android:background="@drawable/edt_text_background"
         android:inputType="textAutoComplete"
         android:padding="16dp"
-        android:text="Enter Pet Breed"
+        android:hint="Enter Pet Breed"
         android:textColor="@color/secondary_color"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/petBreedHeading"
@@ -200,7 +200,7 @@
 
 
     <Button
-        android:id="@+id/nextBtnOne"
+        android:id="@+id/checkDiseaseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

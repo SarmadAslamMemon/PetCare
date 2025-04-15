@@ -1,74 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    app:cardElevation="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardBackgroundColor="@color/primary_color">
+    android:layout_margin="12dp"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="16dp"
+    android:backgroundTint="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
 
-        <!-- Icon with primary color -->
-        <ImageView
-            android:id="@+id/start_icon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:src="@drawable/doctor_vet_svg_ic"
-            android:layout_weight="1.5"
-            android:padding="6dp"
-            android:contentDescription="Icon"
-            android:scaleType="centerInside"
-            android:layout_marginEnd="16dp" />
-
-        <!-- Text Section -->
+        <!-- Top Content Row -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/doctorNameTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="HMKCODE BLOG"
-                android:layout_gravity="start"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="16sp" />
+            <!-- Image and badge container -->
+            <FrameLayout
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginEnd="12dp">
 
-            <!-- Link -->
-            <TextView
-                android:id="@+id/docterHospitalTextView"
-                android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/doctorImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/doctor_vet_svg_ic"
+                    android:scaleType="centerCrop"
+                    />
+            </FrameLayout>
+
+            <!-- Info Column -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="hmkcode.com"
-                android:layout_gravity="start"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/doctorNameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="name"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:drawableEnd="@drawable/ic_verified"
+                    android:textColor="@android:color/black" />
+
+
+
+                <TextView
+                    android:id="@+id/docterHospitalTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="special"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray" />
+
+                <!-- Rating row -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="6dp">
+
+                    <ImageView android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_star"
+                        android:layout_marginEnd="2dp" />
+           <ImageView android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_star"
+                        android:layout_marginEnd="2dp" />
+           <ImageView android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_star"
+                        android:layout_marginEnd="2dp" />
+           <ImageView android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_star"
+                        android:layout_marginEnd="2dp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Icon at the right end -->
-        <ImageView
+        <!-- Button -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/callDoctorIc"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/call_svg_ic"
-            app:tint="@color/white"
-            android:contentDescription="Right Icon"
-            android:tint="@color/black" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/rounded_image_background"
+            android:text="Make Appointment"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

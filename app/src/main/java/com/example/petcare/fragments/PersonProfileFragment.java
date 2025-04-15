@@ -44,7 +44,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PersonProfileFragment extends Fragment {
 
 
-    CardView cardView;
+    CardView petCardView,infoCardView,logoutCardView;
     ImageView petImageViewUserProfile;
     CircleImageView personProfilePic;
     TextView petName;
@@ -135,6 +135,11 @@ public class PersonProfileFragment extends Fragment {
         personProfilePic.setOnClickListener(view1 -> cameraUtils.checkPermissionsAndOpen(cameraActivityResultLauncher, galleryActivityResultLauncher));
 
 
+        petCardView.setOnClickListener(view1 -> {
+            Intent i = new Intent(getActivity(), PetDetailsActivity.class);
+            startActivity(i);
+        });
+
 
         
 
@@ -147,13 +152,16 @@ public class PersonProfileFragment extends Fragment {
     private void setUserData() {
         User user = sharePreference.getUserRegisteration();
         if(user != null){
-            dataBinding.userNameEditText.setText(user.getFirstName());
-            dataBinding.addressTextView.setText(user.getAddress());
-            dataBinding.emailTextView.setText(user.getEmail());
-            dataBinding.dobTextView.setText(user.getDateOfBirth());
+//            dataBinding.userNameEditText.setText(user.getFirstName());
+//            dataBinding.addressTextView.setText(user.getAddress());
+//            dataBinding.emailTextView.setText(user.getEmail());
+//            dataBinding.dobTextView.setText(user.getDateOfBirth());
 
         }
     }
+
+
+
 
     private void saveImageToInternalStorage(Uri imageUri) {
         try {
@@ -204,7 +212,9 @@ public class PersonProfileFragment extends Fragment {
 
     private void getViews(View view) {
         personProfilePic = view.findViewById(R.id.profilePicCardView);
-//        cardView = view.findViewById(R.id.addPetProfile);
+        petCardView = view.findViewById(R.id.cardPets);
+        infoCardView = view.findViewById(R.id.cardInfo);
+        logoutCardView = view.findViewById(R.id.cardLogout);
 //        petImageViewUserProfile = view.findViewById(R.id.petImageViewUserProfile);
 //        petName = view.findViewById(R.id.petNameUserProfile);
 //        addPetLinearLayout = view.findViewById(R.id.addPetCard);

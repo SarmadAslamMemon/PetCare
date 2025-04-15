@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashBoardFragment">
+
+    <fragment
+        android:id="@+id/dashBoardFragment"
+        android:name="com.example.petcare.fragments.DashBoardFragment"
+        android:label="fragment_dash_board"
+        tools:layout="@layout/fragment_dash_board" >
+        <action
+            android:id="@+id/action_dashBoardFragment_to_personProfileFragment"
+            app:destination="@id/personProfileFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_communityFragment"
+            app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_healthTipFragment"
+            app:destination="@id/healthTipFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_notification_Fragment"
+            app:destination="@id/notification_Fragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_petMealFragment"
+            app:destination="@id/petMealFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_consultationFragment"
+            app:destination="@id/consultationFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_AIDiseaseDetectorFragment"
+            app:destination="@id/AIDiseaseDetectorFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_blogFragment"
+            app:destination="@id/blogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/petMealFragment"
+        android:name="com.example.petcare.fragments.PetMealFragment"
+        android:label="fragment_pet_meal"
+        tools:layout="@layout/fragment_pet_meal" >
+        <action
+            android:id="@+id/action_petMealFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notification_Fragment"
+        android:name="com.example.petcare.notification.Notification_Fragment"
+        android:label="fragment_notification_"
+        tools:layout="@layout/fragment_notification_" >
+        <action
+            android:id="@+id/action_notification_Fragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/healthTipFragment"
+        android:name="com.example.petcare.fragments.HealthTipFragment"
+        android:label="HealthTipFragment" >
+        <action
+            android:id="@+id/action_healthTipFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.example.petcare.fragments.consultion.CommunityFragment"
+        android:label="fragment_consultation"
+        tools:layout="@layout/fragment_consultation" >
+        <action
+            android:id="@+id/action_communityFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personProfileFragment"
+        android:name="com.example.petcare.fragments.PersonProfileFragment"
+        android:label="PersonProfileFragment" >
+        <action
+            android:id="@+id/action_personProfileFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/consultationFragment"
+        android:name="com.example.petcare.fragments.ConsultationFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_consultationFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/AIDiseaseDetectorFragment"
+        android:name="com.example.petcare.fragments.AIDiseaseDetectorFragment"
+        android:label="fragment_a_i_disease_detector"
+        tools:layout="@layout/fragment_a_i_disease_detector" >
+        <action
+            android:id="@+id/action_AIDiseaseDetectorFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogFragment"
+        android:name="com.example.petcare.fragments.BlogFragment"
+        android:label="fragment_blog"
+        tools:layout="@layout/fragment_blog" >
+        <action
+            android:id="@+id/action_blogFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navhostfragment"
+        android:name="com.example.petcare.navhostfragment"
+        android:label="fragment_navhostfragment"
+        tools:layout="@layout/fragment_navhostfragment" >
+        <action
+            android:id="@+id/action_navhostfragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
+    </fragment>
+</navigation>

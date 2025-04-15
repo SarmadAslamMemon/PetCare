@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.petcare.R;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 
@@ -26,21 +27,27 @@ public class PetMealFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pet_meal, container, false);
 
+        MaterialToolbar topAppBar = view.findViewById(R.id.topAppBar);
+        topAppBar.setNavigationOnClickListener(v -> {
+            requireActivity().onBackPressed();
+        });
+        topAppBar.setTitle("Pet Meal");
+
         // Initialize views
-        ImageView backButton = view.findViewById(R.id.backButtonIcPetMeals);
-        ImageView petMealTitleImage = view.findViewById(R.id.petMealTitleImage);
-        TextView catNameText = view.findViewById(R.id.catNameText);
-        TextInputEditText favoriteFoodEditText = view.findViewById(R.id.favoriteFoodEditText);
+//        ImageView backButton = view.findViewById(R.id.backButtonIcPetMeals);
+//        ImageView petMealTitleImage = view.findViewById(R.id.petMealTitleImage);
+//        TextView catNameText = view.findViewById(R.id.catNameText);
+//        TextInputEditText favoriteFoodEditText = view.findViewById(R.id.favoriteFoodEditText);
         eatingTimeEditText1 = view.findViewById(R.id.eatingTimeEditText);
         eatingTimeEditText2 = view.findViewById(R.id.eatingTimeEditText2);
         eatingTimeEditText3 = view.findViewById(R.id.eatingTimeEditText3);
 
-        backButton.setOnClickListener(v -> {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragmentContainerPetMeal, new DashBoardFragment());
-            transaction.addToBackStack(null);
-            transaction.commit();
-        });
+//        backButton.setOnClickListener(v -> {
+//            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//            transaction.replace(R.id.fragmentContainerPetMeal, new DashBoardFragment());
+//            transaction.addToBackStack(null);
+//            transaction.commit();
+//        });
 
 
         eatingTimeEditText1.setOnClickListener(v -> showTimePickerDialog(eatingTimeEditText1));

@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.3"
+
 circleimageview = "3.1.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -7,7 +8,8 @@ espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.3"
-constraintlayout = "2.2.0"
+constraintlayout = "2.2.1"
+navigationFragmentKtx = "2.8.9"
 retrofit = "2.9.0"
 gson = "2.10.1"
 lottie = "6.0.1"
@@ -15,6 +17,10 @@ glide = "4.15.1"
 annotation = "1.9.1"
 lifecycleLivedataKtx = "2.8.7"
 lifecycleViewmodelKtx = "2.8.7"
+googleGmsGoogleServices = "4.4.2"
+firebaseMessaging = "24.1.1"
+smoothbottombar = "1.7.9"
+
 
 [libraries]
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
@@ -25,6 +31,8 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
@@ -34,6 +42,9 @@ glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", versi
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
+smoothbottombar = { module = "com.github.ibrahimsn98:SmoothBottomBar", version.ref = "smoothbottombar" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }

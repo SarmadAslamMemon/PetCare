@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <item
-            android:id="@+id/homeMenu"
+            android:id="@+id/mainDashBoardMenuItem"
             android:title="Home"
+            app:itemIconTint="@null"
             android:icon="@drawable/home_menu_ic"
-            app:iconTint="@null"
             >
         </item>
     <item
         android:id="@+id/communityMenu"
         android:title="Community"
-        android:icon="@drawable/community_ic"
-        app:iconTint="@null"
+        app:itemIconTint="@null"
+        android:icon="@drawable/community_menu_ic"
         >
     </item>
 
     <item
         android:id="@+id/petprofileMenu"
         android:title="Pet Profile"
-        android:icon="@drawable/pet_profile_ic"
-        app:iconTint="@null"
+        app:itemIconTint="@null"
+        android:icon="@drawable/pet_menu_ic"
         >
     </item>
     <item
         android:id="@+id/personprofileMenu"
         android:title="Profile"
-        app:iconTint="@null"
-        android:icon="@drawable/avatar_people_person_profile_user_svgrepo_com">
+        app:itemIconTint="@null"
+        android:icon="@drawable/user_profile_menu_ic">
     </item>
 </menu>

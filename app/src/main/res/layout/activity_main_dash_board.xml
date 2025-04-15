@@ -8,23 +8,12 @@
     android:background="@drawable/app_background"
     android:orientation="vertical">
 
+    <!-- Main content container -->
     <FrameLayout
         android:id="@+id/frameLayoutMainDashBoard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomnavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemIconTint="@color/primary_color"
-        app:itemTextColor="@color/primary_color"
-        app:menu="@menu/bottom_navbar"
-        android:layout_gravity="bottom">
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        android:layout_height="match_parent"
+        android:layout_gravity="top" />
 
 
 

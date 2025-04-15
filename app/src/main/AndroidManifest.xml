@@ -17,6 +17,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".SmartPaw"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetCare"
@@ -27,11 +28,6 @@
             android:exported="true"
             android:label="@string/title_activity_login" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
@@ -39,7 +35,16 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainDashBoardActivity"
-            android:exported="true"></activity>
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+        </activity>
         <activity android:name=".PetDetailsActivity" />
         <activity
             android:name=".RegistrationActivity"

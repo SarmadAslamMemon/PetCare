@@ -3,206 +3,340 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-
+        <!-- Data binding goes here if needed -->
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/app_background"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="false"
+        android:fillViewport="true">
 
-        <!-- CardView at the top of the screen -->
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilePicCardView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/dashboard_profile_ic"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/petsLinearLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:background="@color/white"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:paddingHorizontal="16dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/profilePicCardView">-->
-
-<!--            &lt;!&ndash; Pet Profile Card &ndash;&gt;-->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/addPetProfile"-->
-<!--                android:layout_width="80dp"-->
-<!--                android:layout_height="80dp"-->
-<!--                android:layout_marginEnd="12dp"-->
-<!--                android:elevation="8dp"-->
-<!--                app:cardCornerRadius="12dp"-->
-<!--                android:padding="8dp">-->
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:gravity="center"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/petImageViewUserProfile"-->
-<!--                        android:layout_width="50dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:src="@drawable/pets_foot_ic"-->
-<!--                        android:contentDescription="Pet Icon" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/petNameUserProfile"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="4dp"-->
-<!--                        android:text="Pet Name"-->
-<!--                        android:textColor="#000000"-->
-<!--                        android:textSize="14sp" />-->
-<!--                </LinearLayout>-->
-<!--            </androidx.cardview.widget.CardView>-->
-
-<!--            &lt;!&ndash; Add Pet Card &ndash;&gt;-->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/addPetCard"-->
-<!--                android:layout_width="80dp"-->
-<!--                android:layout_height="80dp"-->
-<!--                android:layout_marginStart="12dp"-->
-<!--                android:elevation="8dp"-->
-<!--                app:cardCornerRadius="12dp"-->
-<!--                android:padding="8dp">-->
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:gravity="center"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="50dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:src="@drawable/plus_square_svgrepo_com"-->
-<!--                        android:contentDescription="Add Pet Icon"-->
-<!--                        app:tint="@color/black" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/addPetTextView"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="4dp"-->
-<!--                        android:text="Add Pet"-->
-<!--                        android:textColor="#000000"-->
-<!--                        android:textSize="14sp" />-->
-<!--                </LinearLayout>-->
-<!--            </androidx.cardview.widget.CardView>-->
-<!--        </LinearLayout>-->
-
-
-
-        <LinearLayout
-            android:id="@+id/userInfoLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical"
-            android:gravity="center"
+            android:background="@drawable/app_background"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/profilePicCardView"
-            tools:layout_editor_absoluteX="0dp">
+            android:paddingBottom="80dp"
+            tools:context=".YourActivity">
 
-            <EditText
-                android:id="@+id/userNameEditText"
-                android:layout_width="match_parent"
+            <!-- Container for the profile pic (so we can anchor below it) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profileCardContainer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edt_text_background"
-                android:drawableEnd="@drawable/pen_edit_svg"
-                android:padding="16dp"
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="8dp"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                android:inputType="textPersonName"
-                android:hint="First Name"
-                android:textColor="@color/secondary_color"
-                android:textSize="13sp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profilePicCardView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/dashboard_profile_ic"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@android:color/white" />
+            </androidx.cardview.widget.CardView>
 
-
-            <EditText
-                android:id="@+id/emailTextView"
-                android:layout_width="match_parent"
+            <!-- User Name -->
+            <TextView
+                android:id="@+id/userNameText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/edt_text_background"
-                android:drawableEnd="@drawable/pen_edit_svg"
-                android:padding="16dp"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/secondary_color"
-                android:textSize="13sp" />
+                android:layout_marginTop="16dp"
+                android:text="Nick Edward"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.02"
+                app:layout_constraintTop_toBottomOf="@id/profileCardContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-
-            <EditText
-                android:id="@+id/dobTextView"
-                android:layout_width="match_parent"
+            <!-- Email -->
+            <TextView
+                android:id="@+id/emailText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/edt_text_background"
-                android:drawableEnd="@drawable/pen_edit_svg"
-                android:padding="16dp"
-                android:hint="Date of Birth"
-                android:inputType="date"
-                android:textColor="@color/secondary_color"
-                android:textSize="13sp" />
+                android:layout_marginTop="4dp"
+                android:text="nickedward@gmail.com"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:alpha="0.8"
+                app:layout_constraintTop_toBottomOf="@id/userNameText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <EditText
-                android:id="@+id/addressTextView"
-                android:layout_width="match_parent"
+            <!-- Action Cards Row -->
+            <LinearLayout
+                android:id="@+id/cardRowLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                app:layout_constraintTop_toBottomOf="@id/emailText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                android:background="@drawable/edt_text_background"
-                android:drawableEnd="@drawable/pen_edit_svg"
-                android:padding="16dp"
-                android:hint="Address"
-                android:inputType="textPostalAddress"
-                android:textColor="@color/secondary_color"
-                android:textSize="13sp" />
-        </LinearLayout>
+                <!-- My Pets -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPets"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@android:color/white">
 
-        <Button
-            android:id="@+id/nextBtnOne"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginVertical="16dp"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/primary_color"
-            android:text="Update"
-            android:textSize="16sp"
-            app:cornerRadius="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userInfoLayout" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_petp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="My Pets"
+                            android:textColor="#333"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- My Info -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@android:color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_info" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="My Info"
+                            android:textColor="#333"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Logout -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLogout"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@android:color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_logout" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Logout"
+                            android:textColor="#333"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Personal Information Label -->
+            <TextView
+                android:id="@+id/personalInfoLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Personal Information"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/cardRowLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- User Info Fields -->
+            <LinearLayout
+                android:id="@+id/userInfoLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/personalInfoLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- First Name Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/userNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/secondary_color"
+                    app:strokeWidth="1dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardUseCompatPadding="true">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="First Name"
+                        android:padding="16dp"
+                        android:textColor="@color/secondary_color"
+                        android:textSize="13sp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Email Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/emailTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/secondary_color"
+                    app:strokeWidth="1dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardUseCompatPadding="true">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:padding="16dp"
+                        android:textColor="@color/secondary_color"
+                        android:textSize="13sp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Date of Birth Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/dobTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/secondary_color"
+                    app:strokeWidth="1dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardUseCompatPadding="true">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Date of Birth"
+                        android:padding="16dp"
+                        android:textColor="@color/secondary_color"
+                        android:textSize="13sp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Address Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/addressTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/secondary_color"
+                    app:strokeWidth="1dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardUseCompatPadding="true">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:padding="16dp"
+                        android:textColor="@color/secondary_color"
+                        android:textSize="13sp" />
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+
+
+            <!-- Update Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/nextBtnOne"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginBottom="32dp"
+                android:text="Update"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                app:cornerRadius="12dp"
+                app:rippleColor="@color/primary_color"
+                app:backgroundTint="@color/primary_color"
+                app:elevation="4dp"
+                app:layout_constraintTop_toBottomOf="@id/userInfoLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
-
-
-
-
-
-

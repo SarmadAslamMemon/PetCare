@@ -64,11 +64,11 @@ public class GeneralClass {
 public static List<Doctor> getDoctors() {
     List<Doctor> doctors = new ArrayList<>();
 
-    doctors.add(new Doctor("Dr. Ahmed Khan", "DVM", "Pet Care Veterinary Clinic, Gulshan-e-Iqbal", "+92 321-2345678"));
-    doctors.add(new Doctor("Dr. Fatima Siddiqui", "DVM", "The Animal Care Clinic, Gulistan-e-Johar", "+92 322-3456789"));
-    doctors.add(new Doctor("Dr. Muhammad Usman", "DVM", "Karachi Animal Hospital, Gulshan-e-Iqbal", "+92 300-4567890"));
-    doctors.add(new Doctor("Dr. Ayesha Farooq", "DVM", "Companion Animal Clinic, Gulistan-e-Johar", "+92 331-5678901"));
-    doctors.add(new Doctor("Dr. Zainab Iqbal", "DVM", "Happy Tails Veterinary Clinic, Gulshan-e-Iqbal", "+92 315-6789012"));
+    doctors.add(new Doctor("Dr. Ahmed Khan", "DVM", "Pet Care Veterinary Clinic, Gulshan-e-Iqbal", "+92 321-2345678",R.drawable.doc_male3,"Specialized in dogs and cats,Take a good care of them "));
+    doctors.add(new Doctor("Dr. Fatima Siddiqui", "DVM", "The Animal Care Clinic, Gulistan-e-Johar", "+92 322-3456789",R.drawable.doc_fem_2,"Specialized in birds,Take a good care of them "));
+    doctors.add(new Doctor("Dr. Muhammad Usman", "DVM", "Karachi Animal Hospital, Gulshan-e-Iqbal", "+92 300-4567890",R.drawable.doc_male_1,"Specialized in fish,Take a good care of them"));
+    doctors.add(new Doctor("Dr. Ayesha Farooq", "DVM", "Companion Animal Clinic, Gulistan-e-Johar", "+92 331-5678901",R.drawable.doc_fem_1,"Specialized in rabbits,Take a good care of them"));
+    doctors.add(new Doctor("Dr. Zainab Iqbal", "DVM", "Happy Tails Veterinary Clinic, Gulshan-e-Iqbal", "+92 315-6789012",R.drawable.doc_fem_3,"Specialized in dogs,Take a good care of them"));
 
     return Collections.unmodifiableList(doctors);
 }

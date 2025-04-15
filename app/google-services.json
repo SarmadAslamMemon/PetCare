@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1077305179478",
+    "project_id": "smartpaw-be099",
+    "storage_bucket": "smartpaw-be099.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077305179478:android:3da51a5c6f40ef09e7aaf7",
+        "android_client_info": {
+          "package_name": "com.example.petcare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwwSXfZTS9PrYoPmNgPBjNhfKXZy4soXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

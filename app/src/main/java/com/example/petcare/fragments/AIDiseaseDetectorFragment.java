@@ -53,11 +53,11 @@ public class AIDiseaseDetectorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize views
-        imageview = view.findViewById(R.id.diseaseSymptomImage);
-        cardView = view.findViewById(R.id.cardView);
+//        imageview = view.findViewById(R.id.diseaseSymptomImage);
+//        cardView = view.findViewById(R.id.cardView);
         editText = view.findViewById(R.id.petAge);
         autoCompleteTextView = view.findViewById(R.id.petTypeDropdown);
-        updateButton = view.findViewById(R.id.checkDiseaseButton);
+//        updateButton = view.findViewById(R.id.checkDiseaseButton);
 
 
         updateButton.setOnClickListener(new View.OnClickListener() {

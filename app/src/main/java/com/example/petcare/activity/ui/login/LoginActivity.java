@@ -2,6 +2,7 @@ package com.example.petcare.activity.ui.login;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -22,11 +23,24 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.content.Intent;
 
 import com.example.petcare.R;
+import com.example.petcare.activity.MainDashBoardActivity;
 import com.example.petcare.activity.ui.login.LoginViewModel;
 import com.example.petcare.activity.ui.login.LoginViewModelFactory;
 import com.example.petcare.databinding.ActivityLogin2Binding;
+import com.example.petcare.modelclass.LoginRequest;
+import com.example.petcare.modelclass.LoginResponse;
+import com.example.petcare.modelclass.User;
+import com.example.petcare.network.ApiService;
+import com.example.petcare.network.RetrofitClient;
+import com.example.petcare.utility.SharePreference;
+
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -120,6 +134,42 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+
+        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+        apiService.loginUser(new LoginRequest(usernameEditText.getText().toString(), passwordEditText.getText().toString())).enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+                loginButton.setEnabled(true);
+                loginButton.setText("Login");
+
+                if (response.isSuccessful() && response.body() != null) {
+                    LoginResponse loginResponse = response.body();
+                    if (loginResponse.isSuccess()) {
+                        User user = loginResponse.getData();
+                        if (user != null) {
+                            // Store user data in SharedPreferences
+                            SharePreference.getInstance(LoginActivity.this).saveUserRegisteration(user);
+                            // Navigate to main activity
+                            startActivity(new Intent(LoginActivity.this, MainDashBoardActivity.class));
+                            finish();
+                        } else {
+                            showError("Invalid user data received");
+                        }
+                    } else {
+                        showError(loginResponse.getMessage());
+                    }
+                } else {
+                    showError("Login failed. Please try again.");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
+                loginButton.setEnabled(true);
+                loginButton.setText("Login");
+                showError("Network error: " + t.getMessage());
+            }
+        });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
@@ -130,5 +180,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showError(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

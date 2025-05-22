@@ -34,6 +34,7 @@ public class BlogFragment extends Fragment {
             if (blog != null) {
                 headingText.setText(blog.getBlogTitle());
                 blogContent.setText(Html.fromHtml(blog.getBlogText(), Html.FROM_HTML_MODE_LEGACY));
+
             }
         }
 

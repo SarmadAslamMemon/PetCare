@@ -12,6 +12,8 @@
     <color name="secondaryTextColor">#5B5757</color>
     <color name="purple_700">#7B1FA2</color>
     <color name="light_gray">#D3D3D3</color>
+    <color name="duo_tone_light">#FAFAFA</color>
+    <color name="duo_tone_dark">#263238</color>
 
 
 

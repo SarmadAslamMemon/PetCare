@@ -1,22 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".fragments.ConsultationFragment">
+    tools:context=".fragments.consultion.CommunityFragment">
 
-    <include
-        layout="@layout/top_app_bar_layout"
+    <!-- Top App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDoctorList"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Community"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@color/white"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Pull to Refresh Layout -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/doctors_list_layout_item"
-        />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</FrameLayout>
+            <!-- Blog List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/blogsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="8dp"
+                android:scrollbars="vertical"/>
+
+            <!-- No Data Found Layout -->
+            <LinearLayout
+                android:id="@+id/noDataLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/unavailable_ic"
+                    android:contentDescription="No Data Found"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="No Blogs Found"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Be the first to share your pet care experience!"
+                    android:textSize="14sp"
+                    android:textColor="@color/light_gray"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCreateBlog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="Create New Blog"
+        android:scaleType="centerInside"
+        android:src="@drawable/pen_edit_svg"
+        app:backgroundTint="@color/primary_color"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:tint="@android:color/white" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

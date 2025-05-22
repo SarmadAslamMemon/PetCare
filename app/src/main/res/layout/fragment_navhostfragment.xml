@@ -16,14 +16,6 @@
         app:defaultNavHost="true" />
 
     <!-- Bottom Navigation Bar pinned to bottom -->
-    <me.ibrahimsn.lib.SmoothBottomBar
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        app:backgroundColor="@color/primary_color"
-        app:itemIconTint="@null"
-        app:menu="@menu/bottom_navbar" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

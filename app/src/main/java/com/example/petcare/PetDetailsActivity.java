@@ -1,105 +1,96 @@
 package com.example.petcare;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.petcare.activity.MainDashBoardActivity;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.example.petcare.adapter.PetAdapter;
+import com.example.petcare.fragments.AddPetBottomSheet;
+import com.example.petcare.fragments.PetDetailsBottomSheet;
+import com.example.petcare.modelclass.Pet;
+import com.example.petcare.network.ApiService;
+import com.example.petcare.network.RetrofitClient;
+import com.example.petcare.utility.SharePreference;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class PetDetailsActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    private TextInputEditText petNameEditText, petColorEditText, petAgeEditText;
-    private AutoCompleteTextView petTypeAutoCompleteTextView;
-    private TextInputLayout petNameLayout, petColorLayout, petAgeLayout, petTypeLayout;
-    private Button nextButton;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class PetDetailsActivity extends AppCompatActivity implements PetAdapter.OnPetClickListener {
+    private RecyclerView recyclerView;
+    private PetAdapter adapter;
+    private FloatingActionButton addPetButton;
+    private SharePreference sharePreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pet_details); // Replace with your actual layout name
+        setContentView(R.layout.activity_pet_details);
 
-        // Initialize views
-        petNameEditText = findViewById(R.id.petNameEditText);
-        petColorEditText = findViewById(R.id.petColorEditText);
-        petAgeEditText = findViewById(R.id.petAgeEditText);
-        petTypeAutoCompleteTextView = findViewById(R.id.petTypeAutoCompleteTextView);
-        petNameLayout = findViewById(R.id.petNameLayout);
-        petColorLayout = findViewById(R.id.petColorLayout);
-        petAgeLayout = findViewById(R.id.petAgeLayout);
-        petTypeLayout = findViewById(R.id.petTypeLayout);
-        nextButton = findViewById(R.id.nextButton);
-
-        // Initialize dropdown data
-        setupDropdownMenu();
-
-        // Set button click listener
-        nextButton.setOnClickListener(v -> validateInputFields());
+        sharePreference = new SharePreference(this);
+        initViews();
+        setupRecyclerView();
+        loadPets();
     }
 
-    private void setupDropdownMenu() {
-        // Static data from GeneralClass
-        String[] petTypes = GeneralClass.getPetTypes();
+    private void initViews() {
+        recyclerView = findViewById(R.id.recyclerView);
+        addPetButton = findViewById(R.id.addPetButton);
 
-        // Set adapter for AutoCompleteTextView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, petTypes);
-        petTypeAutoCompleteTextView.setAdapter(adapter);
+        addPetButton.setOnClickListener(v -> {
+            AddPetBottomSheet bottomSheet = new AddPetBottomSheet();
+            bottomSheet.show(getSupportFragmentManager(), "AddPetBottomSheet");
 
-        // Set dropdown behavior
-        petTypeAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedType = (String) parent.getItemAtPosition(position);
-            Toast.makeText(this, "Selected: " + selectedType, Toast.LENGTH_SHORT).show();
         });
     }
 
-    private void validateInputFields() {
-        // Example input fields
-        TextInputLayout petNameLayout = findViewById(R.id.petNameLayout);
-        TextInputEditText petNameEditText = findViewById(R.id.petNameEditText);
-
-        TextInputLayout petColorLayout = findViewById(R.id.petColorLayout);
-        TextInputEditText petColorEditText = findViewById(R.id.petColorEditText);
-
-        boolean isValid = true;
-
-        // Validate Pet Name
-        if (petNameEditText.getText().toString().trim().isEmpty()) {
-            petNameLayout.setError("Pet name cannot be empty");
-            isValid = false;
-        } else {
-            petNameLayout.setError(null); // Clear error
-            petNameLayout.setErrorEnabled(false); // Remove space
-        }
-
-        // Validate Pet Color
-        if (petColorEditText.getText().toString().trim().isEmpty()) {
-            petColorLayout.setError("Pet color cannot be empty");
-            isValid = false;
-        } else {
-            petColorLayout.setError(null); // Clear error
-            petColorLayout.setErrorEnabled(false); // Remove space
-        }
-
-
-        if (isValid){
-            petNameLayout.setError(null);
-            petColorLayout.setError(null);
-            petAgeLayout.setError(null);
-            petTypeLayout.setError(null);
-
-            Intent intent = new Intent(PetDetailsActivity.this, MainDashBoardActivity.class);
-            startActivity(intent);
-
-
-
-        }
+    private void setupRecyclerView() {
+        adapter = new PetAdapter(new ArrayList<>(), this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
+    private void loadPets() {
+        // Get user ID from SharedPreferences
+        int userId = sharePreference.getUserId();
+        if (userId == -1) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Make API call to get pets
+        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+        Call<List<Pet>> call = apiService.getPetsByUserId(userId);
+
+        call.enqueue(new Callback<List<Pet>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Pet>> call, @NonNull Response<List<Pet>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    adapter.updatePets(response.body());
+                } else {
+                    Toast.makeText(PetDetailsActivity.this, "Failed to load pets", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Pet>> call, @NonNull Throwable t) {
+                Toast.makeText(PetDetailsActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onPetClick(Pet pet) {
+        PetDetailsBottomSheet bottomSheet = PetDetailsBottomSheet.newInstance(pet);
+        bottomSheet.show(getSupportFragmentManager(), "PetDetailsBottomSheet");
+    }
 }

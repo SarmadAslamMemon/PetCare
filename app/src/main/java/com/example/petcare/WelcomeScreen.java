@@ -37,7 +37,7 @@ public class WelcomeScreen extends AppCompatActivity {
         setContentView(R.layout.welcome_screen_three);
         finishBtnThree = findViewById(R.id.finishBtnThree);
         finishBtnThree.setOnClickListener(v -> {
-            Intent intent = new Intent(WelcomeScreen.this, RegistrationActivity.class);
+            Intent intent = new Intent(WelcomeScreen.this, LoginActivity.class);
             startActivity(intent);
             finish(); // End this activity so the user can't go back to the welcome screens
         });

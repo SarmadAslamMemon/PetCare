@@ -21,6 +21,7 @@ import com.example.petcare.utility.SharePreference;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -164,14 +165,16 @@ public class RegistrationActivity extends AppCompatActivity {
         Log.w("API_RESPONSE", "Registration API Called "+userRegisterRequest);
         ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
 
-        apiService.registerUser(userRegisterRequest).enqueue(new Callback<Void>() {
+        apiService.registerUser(userRegisterRequest).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful()) {
-                    Intent intent = new Intent(RegistrationActivity.this, MainDashBoardActivity.class);
+                    Snackbar.make(findViewById(android.R.id.content), "Registration Successful", Snackbar.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(intent);
                     sharePreference.setUserRegistered(true);
-                    Snackbar.make(findViewById(android.R.id.content), "Registration Successful", Snackbar.LENGTH_SHORT).show();
+                    User user = response.body();
+                    sharePreference.saveUserRegisteration(user);
 
                 } else {
                     Snackbar.make(findViewById(android.R.id.content), "Registration Failed", Snackbar.LENGTH_SHORT).show();
@@ -179,7 +182,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Snackbar.make(findViewById(android.R.id.content), "Registration Failed", Snackbar.LENGTH_SHORT).show();
             }
         });

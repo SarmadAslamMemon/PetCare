@@ -1,42 +1,64 @@
 package com.example.petcare.modelclass;
 
+import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    private String userId;
-    private String petId;
+    @SerializedName("id")
+    private int id;
+
+    @SerializedName("firstName")
     private String firstName;
+
+    @SerializedName("lastName")
     private String lastName;
+
+    @SerializedName("email")
     private String email;
+
+    @SerializedName("phoneNumber")
+    private String phoneNumber;
+
+    @SerializedName("address")
     private String address;
-    private String dateOfBirth;
 
-    // Constructor
-    public User(String userId, String petId, String firstName, String lastName, String email, String address, String dateOfBirth) {
-        this.userId = userId;
-        this.petId = petId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.address = address;
-        this.dateOfBirth = dateOfBirth;
+    @SerializedName("city")
+    private String city;
+
+    @SerializedName("state")
+    private String state;
+
+    @SerializedName("zipCode")
+    private String zipCode;
+
+    @SerializedName("imageUrl")
+    private String imageUrl;
+
+    @SerializedName("fcmToken")
+    private String fcmToken;
+
+    @SerializedName("deviceId")
+    private String deviceId;
+
+    // Optional: Your old fields if needed
+    private String userId;   // You can remove this if 'id' is enough
+    private String petId;    // Keep if used elsewhere
+    private String dateOfBirth; // Not part of response but can be kept if used elsewhere
+
+    // Default constructor
+    public User() {
     }
 
-    // Getters and Setters
-    public String getUserId() {
-        return userId;
+    // Getters and Setters for all fields
+
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPetId() {
-        return petId;
-    }
-
-    public void setPetId(String petId) {
-        this.petId = petId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -63,12 +85,85 @@ public class User {
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    // Optional getters/setters for your legacy fields
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getPetId() {
+        return petId;
+    }
+
+    public void setPetId(String petId) {
+        this.petId = petId;
     }
 
     public String getDateOfBirth() {

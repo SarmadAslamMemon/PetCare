@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/primary_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/primary_color">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+
+            <ImageView
+                android:id="@+id/blogImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Blog Image"
+                android:background="@drawable/top_image_overlay"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_gradient_overlay"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@color/primary_color">
+
+            <TextView
+                android:id="@+id/blogTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/authorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="13sp"
+                android:textColor="#B0BEC5"
+                android:drawablePadding="4dp"
+                app:drawableStartCompat="@drawable/ic_user_profile"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/blogPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="13sp"
+                android:textColor="#CFD8DC"
+                android:maxLines="3"
+                android:ellipsize="end"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,36 +1,73 @@
 package com.example.petcare.modelclass;
 
+import com.google.gson.annotations.SerializedName;
 
-public class Pet {
+import java.io.Serializable;
 
-    private int petId;
+public class Pet implements Serializable {
+    @SerializedName("id")
+    private int id;
+
+    @SerializedName("userId")
     private int userId;
+
+    @SerializedName("petName")
     private String petName;
-    private String petColor;
-    private int petAge;
+
+    @SerializedName("petCategory")
     private String petCategory;
-    private String petImage;
+
+    @SerializedName("petImageUrl")
+    private String petImageUrl;
+
+    @SerializedName("petAge")
+    private String petAge;
+
+    @SerializedName("petBreed")
+    private String petBreed;
+
+    @SerializedName("petWeight")
+    private int petWeight;
+
+    @SerializedName("petGender")
     private String petGender;
 
+    @SerializedName("fcmToken")
+    private String fcmToken;
 
-    public Pet(int petId, int userId, String petName, String petColor, int petAge, String petCategory, String petImage, String petGender) {
-        this.petId = petId;
-        this.userId = userId;
-        this.petName = petName;
-        this.petColor = petColor;
-        this.petAge = petAge;
-        this.petCategory = petCategory;
-        this.petImage = petImage;
-        this.petGender = petGender;
+    @SerializedName("deviceId")
+    private String deviceId;
+
+    public Pet(int petCount, int i, String petName, String petGender, int i1, String petCategory, String petFavFood, String petGender1) {
     }
 
-    public int getPetId() {
-        return petId;
+    public Pet() {
     }
 
-    public void setPetId(int petId) {
-        this.petId = petId;
-    }
+    // Getters
+    public int getId() { return id; }
+    public String getPetName() { return petName; }
+    public String getPetCategory() { return petCategory; }
+    public String getPetImageUrl() { return petImageUrl; }
+    public String getPetAge() { return petAge; }
+    public String getPetBreed() { return petBreed; }
+    public int getPetWeight() { return petWeight; }
+    public String getPetGender() { return petGender; }
+    public String getFcmToken() { return fcmToken; }
+    public String getDeviceId() { return deviceId; }
+
+    // Setters
+    public void setId(int id) { this.id = id; }
+    public void setPetName(String petName) { this.petName = petName; }
+    public void setPetCategory(String petCategory) { this.petCategory = petCategory; }
+    public void setPetImageUrl(String petImageUrl) { this.petImageUrl = petImageUrl; }
+    public void setPetAge(String petAge) { this.petAge = petAge; }
+    public void setPetBreed(String petBreed) { this.petBreed = petBreed; }
+    public void setPetWeight(int petWeight) { this.petWeight = petWeight; }
+    public void setPetGender(String petGender) { this.petGender = petGender; }
+    public void setFcmToken(String fcmToken) { this.fcmToken = fcmToken; }
+    public void setDeviceId(String deviceId) { this.deviceId = deviceId; }
+
 
     public int getUserId() {
         return userId;
@@ -38,53 +75,5 @@ public class Pet {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public String getPetName() {
-        return petName;
-    }
-
-    public void setPetName(String petName) {
-        this.petName = petName;
-    }
-
-    public String getPetColor() {
-        return petColor;
-    }
-
-    public void setPetColor(String petColor) {
-        this.petColor = petColor;
-    }
-
-    public int getPetAge() {
-        return petAge;
-    }
-
-    public void setPetAge(int petAge) {
-        this.petAge = petAge;
-    }
-
-    public String getPetCategory() {
-        return petCategory;
-    }
-
-    public void setPetCategory(String petCategory) {
-        this.petCategory = petCategory;
-    }
-
-    public String getPetImage() {
-        return petImage;
-    }
-
-    public void setPetImage(String petImage) {
-        this.petImage = petImage;
-    }
-
-    public String getPetGender() {
-        return petGender;
-    }
-
-    public void setPetGender(String petGender) {
-        this.petGender = petGender;
     }
 }

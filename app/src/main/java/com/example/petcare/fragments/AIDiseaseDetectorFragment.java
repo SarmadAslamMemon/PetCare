@@ -57,19 +57,19 @@ public class AIDiseaseDetectorFragment extends Fragment {
 //        cardView = view.findViewById(R.id.cardView);
         editText = view.findViewById(R.id.petAge);
         autoCompleteTextView = view.findViewById(R.id.petTypeDropdown);
-//        updateButton = view.findViewById(R.id.checkDiseaseButton);
+//       updateButton = view.findViewById(R.id.);
 
 
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ProgressDialogUtil.showProgressBar(requireContext(),true);
-
-
-                new Handler().postDelayed(() -> ProgressDialogUtil.showProgressBar(requireContext(),false),2500);
-            }
-        });
+//        updateButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                ProgressDialogUtil.showProgressBar(requireContext(),true);
+//
+//
+//                new Handler().postDelayed(() -> ProgressDialogUtil.showProgressBar(requireContext(),false),2500);
+//            }
+//        });
 
         // Set up AutoCompleteTextView for pet types
         arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.activity_pet_types, petType);

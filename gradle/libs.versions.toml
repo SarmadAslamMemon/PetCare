@@ -2,10 +2,15 @@
 agp = "8.7.3"
 
 circleimageview = "3.1.0"
+googleServices = "4.4.2"
+gradle = "8.4.2"
+hiltAndroidGradlePlugin = "2.51.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+kotlinGradlePlugin = "1.9.22"
+loggingInterceptor = "4.12.0"
 material = "1.12.0"
 activity = "1.9.3"
 constraintlayout = "2.2.1"
@@ -20,14 +25,21 @@ lifecycleViewmodelKtx = "2.8.7"
 googleGmsGoogleServices = "4.4.2"
 firebaseMessaging = "24.1.1"
 smoothbottombar = "1.7.9"
+swiperefreshlayout = "1.1.0"
+tedbottompicker = "2.0.1"
 
 
 [libraries]
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
+google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroidGradlePlugin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
@@ -44,6 +56,7 @@ lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-lived
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 smoothbottombar = { module = "com.github.ibrahimsn98:SmoothBottomBar", version.ref = "smoothbottombar" }
+swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

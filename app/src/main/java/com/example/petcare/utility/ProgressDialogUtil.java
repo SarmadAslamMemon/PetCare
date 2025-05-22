@@ -33,7 +33,7 @@ public class ProgressDialogUtil {
                 lottieAnimationView.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
-                lottieAnimationView.setAnimation(R.raw.dog_walking_anim); // Make sure this file exists in res/raw/
+                lottieAnimationView.setAnimation(R.raw.lottie_loader); // Make sure this file exists in res/raw/
                 lottieAnimationView.setRepeatCount(LottieDrawable.INFINITE);
                 lottieAnimationView.playAnimation();
 

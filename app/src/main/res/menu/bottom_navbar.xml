@@ -2,32 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <item
-            android:id="@+id/mainDashBoardMenuItem"
-            android:title="Home"
-            app:itemIconTint="@null"
-            android:icon="@drawable/home_menu_ic"
-            >
-        </item>
     <item
-        android:id="@+id/communityMenu"
-        android:title="Community"
-        app:itemIconTint="@null"
-        android:icon="@drawable/community_menu_ic"
-        >
-    </item>
+        android:id="@+id/mainDashBoardMenuItem"
+        android:icon="@drawable/ic_house"
+        android:title="Home"
+        app:itemIconTint="@null" />
 
     <item
-        android:id="@+id/petprofileMenu"
-        android:title="Pet Profile"
-        app:itemIconTint="@null"
-        android:icon="@drawable/pet_menu_ic"
-        >
-    </item>
+        android:id="@+id/communityMenu"
+        android:icon="@drawable/community_menu_ic"
+        android:title="Community"
+        app:itemIconTint="@null" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:enabled="false"
+        android:title="" />
+
+
+    <item
+    android:id="@+id/petprofileMenu"
+    android:icon="@drawable/pet_menu_ic"
+    android:title="Pet Profile"
+    app:itemIconTint="@null" />
+
     <item
         android:id="@+id/personprofileMenu"
+        android:icon="@drawable/ic_user_profile"
         android:title="Profile"
-        app:itemIconTint="@null"
-        android:icon="@drawable/user_profile_menu_ic">
-    </item>
+        app:itemIconTint="@null" />
+
 </menu>

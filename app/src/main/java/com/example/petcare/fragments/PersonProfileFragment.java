@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.petcare.PetDetailsActivity;
 import com.example.petcare.R;
 import com.example.petcare.databinding.FragmentPersonProfileBinding;
@@ -152,11 +153,30 @@ public class PersonProfileFragment extends Fragment {
     private void setUserData() {
         User user = sharePreference.getUserRegisteration();
         if(user != null){
-//            dataBinding.userNameEditText.setText(user.getFirstName());
-//            dataBinding.addressTextView.setText(user.getAddress());
-//            dataBinding.emailTextView.setText(user.getEmail());
-//            dataBinding.dobTextView.setText(user.getDateOfBirth());
+            // Set full name
+            String fullName = user.getFirstName() + " " + user.getLastName();
+            dataBinding.userNameText.setText(fullName);
+            
+            // Set user information in cards
+            dataBinding.userNameEditText.setText(fullName);
+            dataBinding.emailTextView.setText(user.getEmail());
+            dataBinding.phoneTextView.setText(
+                    user.getPhoneNumber() != null ? user.getPhoneNumber() : "+920302940349340"
+            );
+            dataBinding.addressTextView.setText(user.getAddress());
 
+            // Handle profile image
+            if (user.getImageUrl() != null && !user.getImageUrl().isEmpty()) {
+                // Load image from URL using your preferred image loading library
+                // For example, using Glide:
+                 Glide.with(this)
+                     .load(user.getImageUrl())
+                     .placeholder(R.drawable.dashboard_profile_ic)
+                     .error(R.drawable.dashboard_profile_ic)
+                     .into(personProfilePic);
+            } else {
+                personProfilePic.setImageResource(R.drawable.dashboard_profile_ic);
+            }
         }
     }
 

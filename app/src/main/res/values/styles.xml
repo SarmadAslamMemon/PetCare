@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.PetCare" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary_color</item>
+
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary_color</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!-- Default font family -->
+        <item name="fontFamily">@font/lora_regular</item>
+        <item name="android:fontFamily">@font/lora_regular</item>
+        <!-- Text appearance -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.App.Headline</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.App.Headline</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.App.Headline</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.App.Title</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.App.Title</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.App.Title</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Body</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.App.Body</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.App.Body</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.App.Body</item>
+        <item name="textAppearanceButton">@style/TextAppearance.App.Body</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.App.Caption</item>
+    </style>
+
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <!-- Text Styles -->
+    <style name="TextAppearance.App.Headline" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/lora_bold</item>
+        <item name="android:fontFamily">@font/lora_bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.App.Title" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/lora_medium</item>
+        <item name="android:fontFamily">@font/lora_medium</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.App.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/lora_regular</item>
+        <item name="android:fontFamily">@font/lora_regular</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.App.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/lora_regular</item>
+        <item name="android:fontFamily">@font/lora_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Button Style -->
+    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
+        <item name="fontFamily">@font/lora_medium</item>
+        <item name="android:fontFamily">@font/lora_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TransparentDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+</resources> 

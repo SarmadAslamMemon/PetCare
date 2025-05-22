@@ -1,141 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/app_background"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
+    <!-- Top App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="My Pets"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@color/white"
+            app:menu="@menu/pet_details_menu"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addPetButton"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/pets_profile"
-        tools:ignore="MissingConstraints" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/petNameLayout"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:paddingBottom="8dp"
-        app:hintAnimationEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView">
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="Add Pet"
+        app:backgroundTint="@color/primary_color"
+        app:elevation="6dp"
+        app:srcCompat="@drawable/plus_square_svgrepo_com" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/petNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edt_text_background"
-            android:contentDescription="Pet Name input field"
-            android:hint="Enter Pet Name"
-            android:importantForAccessibility="yes"
-            android:inputType="text"
-            android:lines="1"
-            android:maxLines="1"
-            android:padding="12dp"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/petColorLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingBottom="8dp"
-        app:hintAnimationEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petNameLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/petColorEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edt_text_background"
-            android:contentDescription="Pet Color input field"
-            android:hint="Enter Pet Color"
-            android:importantForAccessibility="yes"
-            android:inputType="text"
-            android:lines="1"
-            android:maxLines="1"
-            android:padding="12dp"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/petAgeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingBottom="8dp"
-        app:hintAnimationEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petColorLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/petAgeEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edt_text_background"
-            android:contentDescription="Pet Age input field"
-            android:hint="Enter Pet Age"
-            android:importantForAccessibility="yes"
-            android:inputType="number"
-            android:lines="1"
-            android:maxLines="1"
-            android:padding="12dp"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/petTypeLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingBottom="8dp"
-        app:boxStrokeColor="#800000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petAgeLayout">
-
-        <AutoCompleteTextView
-            android:id="@+id/petTypeAutoCompleteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edt_text_background"
-            android:drawablePadding="10dp"
-            android:hint="@string/select_pet"
-            android:inputType="none"
-            android:padding="12dp"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="16dp"
-        android:layout_marginTop="76dp"
-        android:backgroundTint="@color/primary_color"
-        android:text="Next"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:cornerRadius="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petTypeLayout" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

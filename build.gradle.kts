@@ -2,7 +2,7 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.google.gms.google.services) apply false
-    id("org.jetbrains.kotlin.android") version "1.9.22" apply false // Check for latest version
+    id("org.jetbrains.kotlin.android") version "2.0.21" apply false // Check for latest version
 }
 
 
@@ -13,10 +13,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.4.1") // Check for latest version
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22") // Check for latest version
-        classpath("com.google.gms:google-services:4.4.2") //Check for latest version
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.51.1")
+        classpath(libs.gradle) // Check for latest version
+        classpath(libs.kotlin.gradle.plugin) // Check for latest version
+        classpath(libs.google.services) //Check for latest version
+        classpath(libs.hilt.android.gradle.plugin)
     }
 }
 

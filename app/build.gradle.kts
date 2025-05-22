@@ -38,10 +38,6 @@ android {
 }
 
 dependencies {
-
-
-
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -56,17 +52,16 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.circleimageview)
-
     implementation(libs.gson)
     implementation(libs.lottie)
     implementation(libs.glide)
-
-    implementation (libs.smoothbottombar)
-
-    implementation (libs.navigation.fragment.ktx)
-    implementation (libs.navigation.ui.ktx)
-
+    implementation(libs.smoothbottombar)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation (libs.swiperefreshlayout)
 
 
-
+    
+    // OkHttp Logging Interceptor
+    implementation(libs.logging.interceptor)
 }

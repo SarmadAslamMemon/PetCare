@@ -94,7 +94,11 @@ public class SharePreference {
     }
 
     public String getUserPetName() {
-        return sharedPreferences.getString(PET_NAME, null);
+        User user = getUserRegisteration();
+        if (user != null) {
+            return user.getFirstName();
+        }
+        return "User";
     }
 
     public void clear() {
@@ -152,7 +156,7 @@ public class SharePreference {
         List<Pet> pets = getUserStoredPets();
         if (pets != null) {
             for (Pet pet : pets) {
-                if (pet.getPetId()== petId) {
+                if (pet.getId()== petId) {
                     return pet;
                 }
             }
@@ -208,6 +212,14 @@ public class SharePreference {
         return null;
 
 
+    }
+
+    public int getUserId() {
+        User user = getUserRegisteration();
+        if (user != null) {
+            return user.getId();
+        }
+        return -1; // or 0 or throw exception depending on your logic
     }
 
 }

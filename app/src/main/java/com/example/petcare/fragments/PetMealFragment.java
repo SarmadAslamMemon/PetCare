@@ -25,12 +25,15 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Calendar;
 import java.util.Objects;
+import com.example.petcare.modelclass.Pet;
+import android.widget.LinearLayout;
 
 public class PetMealFragment  extends Fragment {
 
     private TextInputEditText eatingTimeEditText1, eatingTimeEditText2, eatingTimeEditText3;
     private TextInputEditText favoriteFoodEditText;
     private SharePreference sharePreference;
+    private Pet selectedPet;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -42,6 +45,19 @@ public class PetMealFragment  extends Fragment {
             requireActivity().onBackPressed();
         });
         topAppBar.setTitle("Pet Meal");
+
+        // Check for selected pet in arguments
+        if (getArguments() != null && getArguments().containsKey("pet")) {
+            selectedPet = (Pet) getArguments().getSerializable("pet");
+            // Show pet info at the top (you can further enhance this UI)
+            TextView petInfoText = new TextView(requireContext());
+            petInfoText.setText("Setting meal for: " + selectedPet.getPetName() + " (" + selectedPet.getPetCategory() + ")");
+            petInfoText.setTextColor(getResources().getColor(R.color.primary_color));
+            petInfoText.setTextSize(18);
+            petInfoText.setPadding(0, 0, 0, 24);
+            LinearLayout contentLayout = view.findViewById(R.id.petMealContentLayout);
+            contentLayout.addView(petInfoText, 0);
+        }
 
         // Initialize views
         favoriteFoodEditText = view.findViewById(R.id.favoriteFoodEditText);

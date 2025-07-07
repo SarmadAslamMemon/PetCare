@@ -36,11 +36,16 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/blogDetailImage"
+                        android:id="@+id/petImage"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:scaleType="centerCrop"
-                        android:contentDescription="Blog Image"/>
+                        android:layout_height="180dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/blogimage" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="1dp"
+                        android:background="#37474F" /> <!-- Slightly muted divider -->
 
                     <TextView
                         android:id="@+id/blogDetailTitle"
@@ -50,6 +55,10 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#37474F" />
 
                     <TextView
                         android:id="@+id/blogDetailContent"

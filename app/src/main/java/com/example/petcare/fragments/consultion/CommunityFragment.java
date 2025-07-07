@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -55,7 +57,7 @@ public class CommunityFragment extends Fragment implements BlogAdapter.OnBlogCli
     private void initViews(View view) {
         recyclerView = view.findViewById(R.id.blogsRecyclerView);
         noDataLayout = view.findViewById(R.id.noDataLayout);
-        FloatingActionButton fabCreateBlog = view.findViewById(R.id.fabCreateBlog);
+        ImageButton fabCreateBlog = view.findViewById(R.id.btnCreateBlog);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
         fabCreateBlog.setOnClickListener(v -> showCreateBlogBottomSheet());

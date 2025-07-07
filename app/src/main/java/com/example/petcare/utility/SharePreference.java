@@ -165,7 +165,7 @@ public class SharePreference {
     }
 
     // Get the list of all stored pets
-    private List<Pet> getUserStoredPets() {
+    public List<Pet> getUserStoredPets() {
         String petsJson = sharedPreferences.getString(USER_PETS_LIST, null);
         if (petsJson != null) {
             Gson gson = new Gson();

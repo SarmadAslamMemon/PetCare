@@ -7,47 +7,31 @@
     android:layout_margin="12dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="6dp"
-    app:cardBackgroundColor="@color/primary_color">
+    app:cardBackgroundColor="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/primary_color">
+        android:background="@android:color/transparent">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="140dp">
-
-            <ImageView
-                android:id="@+id/blogImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:contentDescription="Blog Image"
-                android:background="@drawable/top_image_overlay"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/image_gradient_overlay"/>
-        </FrameLayout>
-
+        <!-- Top Section: Title + Author -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="12dp"
             android:background="@color/primary_color">
 
             <TextView
                 android:id="@+id/blogTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:maxLines="2"
+                android:textAlignment="center"
                 android:ellipsize="end"/>
 
             <TextView
@@ -56,19 +40,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textSize="13sp"
-                android:textColor="#B0BEC5"
+                android:textColor="@color/white"
                 android:drawablePadding="4dp"
-                app:drawableStartCompat="@drawable/ic_user_profile"
+                app:drawableStartCompat="@drawable/avatar_people_person_profile_user_svgrepo_com"
                 android:maxLines="1"
                 android:ellipsize="end"/>
+        </LinearLayout>
+
+        <!-- Divider Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#37474F" /> <!-- Slightly muted divider -->
+
+        <!-- Bottom Section: Preview -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#ECEFF1"> <!-- Light gray-blue tone -->
 
             <TextView
                 android:id="@+id/blogPreview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:textSize="13sp"
-                android:textColor="#CFD8DC"
+                android:textColor="#455A64"
                 android:maxLines="3"
                 android:ellipsize="end"/>
         </LinearLayout>

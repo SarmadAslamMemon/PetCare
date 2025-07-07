@@ -1,13 +1,22 @@
 package com.example.petcare.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
 import com.example.petcare.R;
@@ -51,24 +60,58 @@ public class PetDetailsBottomSheet extends BottomSheetDialogFragment {
             TextView petWeight = view.findViewById(R.id.petWeight);
             TextView petGender = view.findViewById(R.id.petGender);
 
+
             // Set pet details
-            petName.setText(pet.getPetName());
-            petCategory.setText(pet.getPetCategory());
-            petBreed.setText(pet.getPetBreed());
+            petName.setText("Pet Name: "+pet.getPetName());
+            petCategory.setText("Pet Category: "+pet.getPetCategory());
+            petBreed.setText("Pet Breed: "+pet.getPetBreed());
             petAge.setText(String.format("%d years", Integer.parseInt(pet.getPetAge())));
             petWeight.setText(String.format("%d kg", pet.getPetWeight()));
             petGender.setText(pet.getPetGender());
 
             // Load pet image
+            int categoryDrawableRes = R.drawable.pets_foot_ic;
+            if (pet.getPetCategory() != null) {
+                switch (pet.getPetCategory().toLowerCase()) {
+                    case "dog":
+                        categoryDrawableRes = R.drawable.dog_svgrepo_com;
+                        break;
+                    case "cat":
+                        categoryDrawableRes = R.drawable.cat_svgrepo_com;
+                        break;
+                    case "fish":
+                        categoryDrawableRes = R.drawable.fish_svgrepo;
+                        break;
+                    case "rabbit":
+                        categoryDrawableRes = R.drawable.rabbit_easter_svgrepo_com;
+                        break;
+                    case "parrot":
+                        categoryDrawableRes = R.drawable.parrot_svgrepo_com;
+                        break;
+                }
+            }
             if (pet.getPetImageUrl() != null && !pet.getPetImageUrl().isEmpty()) {
                 Glide.with(requireContext())
                         .load(pet.getPetImageUrl())
-                        .placeholder(R.drawable.pets_foot_ic)
-                        .error(R.drawable.pets_foot_ic)
+                        .placeholder(categoryDrawableRes)
+                        .error(categoryDrawableRes)
                         .into(petImage);
             } else {
-                petImage.setImageResource(R.drawable.pets_foot_ic);
+                petImage.setImageResource(categoryDrawableRes);
             }
+
+//            btnSetPetFoodTime.setOnClickListener(v -> {
+//                PetMealFragment fragment = new PetMealFragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("pet", pet);
+//                fragment.setArguments(bundle);
+//                requireActivity().getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.petMealContainer, fragment)
+//                    .addToBackStack(null)
+//                    .commit();
+//                dismiss();
+//            });
         }
 
         return view;

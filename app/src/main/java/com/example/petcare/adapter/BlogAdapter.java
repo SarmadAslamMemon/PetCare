@@ -53,18 +53,15 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
     }
 
     class BlogViewHolder extends RecyclerView.ViewHolder {
-        private ImageView blogImage;
         private TextView blogTitle;
         private TextView authorName;
         private TextView blogPreview;
 
         BlogViewHolder(@NonNull View itemView) {
             super(itemView);
-            blogImage = itemView.findViewById(R.id.blogImage);
             blogTitle = itemView.findViewById(R.id.blogTitle);
             authorName = itemView.findViewById(R.id.authorName);
             blogPreview = itemView.findViewById(R.id.blogPreview);
-
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION && listener != null) {
@@ -77,15 +74,6 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
             blogTitle.setText(blog.getBlogTitle());
             authorName.setText(blog.getAuthorName());
             blogPreview.setText(blog.getBlogText());
-            
-            if (blog.getImageUrl() != null && !blog.getImageUrl().isEmpty()) {
-                Glide.with(itemView.getContext())
-                    .load(blog.getImageUrl())
-                    .placeholder(R.drawable.doc_male_2)
-                    .into(blogImage);
-            } else {
-                blogImage.setImageResource(R.drawable.doc_male_2);
-            }
         }
     }
 } 

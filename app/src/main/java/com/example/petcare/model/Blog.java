@@ -86,7 +86,7 @@ public class Blog implements Serializable {
 
     public String getAuthorName() {
         if (user != null) {
-            return user.getFirstName() + " " + user.getLastName();
+            return user.getFirstName();
         }
         return "Unknown Author";
     }

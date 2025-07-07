@@ -52,7 +52,6 @@ public class BlogDetailFragment extends Fragment {
 
     private void initViews(View view) {
         MaterialToolbar toolbar = view.findViewById(R.id.toolbar);
-        ImageView blogImage = view.findViewById(R.id.blogDetailImage);
         TextView blogTitle = view.findViewById(R.id.blogDetailTitle);
         TextView blogContent = view.findViewById(R.id.blogDetailContent);
         noDataLayout = view.findViewById(R.id.noDataLayout);
@@ -62,18 +61,8 @@ public class BlogDetailFragment extends Fragment {
 
         if (blog != null) {
             ProgressDialogUtil.showProgressBar(requireContext(), true);
-            
-            blogTitle.setText(blog.getBlogTitle());
-            blogContent.setText(blog.getBlogText());
-
-            if (blog.getImageUrl() != null && !blog.getImageUrl().isEmpty()) {
-                Glide.with(requireContext())
-                    .load(blog.getImageUrl())
-                    .placeholder(R.drawable.doc_fem_2)
-                    .error(R.drawable.doc_fem_2)
-                    .into(blogImage);
-            }
-            
+            blogTitle.setText("Title: "+ blog.getBlogTitle());
+            blogContent.setText("Description: \n " +blog.getBlogText());
             updateNoDataVisibility(false);
             ProgressDialogUtil.showProgressBar(requireContext(), false);
         } else {

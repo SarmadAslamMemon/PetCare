@@ -100,16 +100,16 @@ public class CreateBlogBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initViews(View view) {
-        blogImageView = view.findViewById(R.id.blogImageView);
-        pickImageText = view.findViewById(R.id.pickImageText);
+//        blogImageView = view.findViewById(R.id.blogImageView);
+//        pickImageText = view.findViewById(R.id.pickImageText);
         blogTitleInput = view.findViewById(R.id.blogTitleInput);
         blogContentInput = view.findViewById(R.id.blogContentInput);
         postBlogButton = view.findViewById(R.id.postBlogButton);
 
-        cameraUtils = new CameraUtils(requireContext(), blogImageView);
+//        cameraUtils = new CameraUtils(requireContext(), blogImageView);
 
-        pickImageText.setOnClickListener(v ->
-            cameraUtils.checkPermissionsAndOpen(cameraLauncher, galleryLauncher));
+//        pickImageText.setOnClickListener(v ->
+//            cameraUtils.checkPermissionsAndOpen(cameraLauncher, galleryLauncher));
 
         postBlogButton.setOnClickListener(v -> validateAndPost());
     }

@@ -1,46 +1,88 @@
 package com.example.petcare.notification;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
-import com.example.petcare.SmartPaw;
+import com.example.petcare.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    private static final String CHANNEL_ID = "smartpaw_notifications";
+    private static final String CHANNEL_NAME = "SmartPaw Alerts";
+    private static final String CHANNEL_DESC = "Notifications for pet health and app alerts";
+
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         Log.d("FCM", "From: " + remoteMessage.getFrom());
 
-        // The service needs a NotificationHandler instance to show notifications.
-        // We'll get this through a Service Locator pattern for simplicity.
-        NotificationHandler notificationHandler = ((SmartPaw) getApplication()).getNotificationHandler();
-        if (notificationHandler == null) {
-            Log.e("FCM", "NotificationHandler not initialized in Application class");
-            return;
+        // Create notification channel if not created
+        createNotificationChannel();
+
+        String title = null;
+        String body = null;
+
+        if (remoteMessage.getNotification() != null) {
+            title = remoteMessage.getNotification().getTitle();
+            body = remoteMessage.getNotification().getBody();
         }
 
-
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d("FCM", "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            if (remoteMessage.getNotification().getTitle() != null) {
-                notificationHandler.showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody() != null ? remoteMessage.getNotification().getBody() : "");
+        if (!remoteMessage.getData().isEmpty()) {
+            if (remoteMessage.getData().containsKey("title")) {
+                title = remoteMessage.getData().get("title");
+            }
+            if (remoteMessage.getData().containsKey("body")) {
+                body = remoteMessage.getData().get("body");
             }
         }
 
+        if (title != null && body != null) {
+            showNotification(title, body);
+        }
+    }
 
-        // Check if message contains a data payload.
-        if (remoteMessage.getData().size() > 0) {
-            Log.d("FCM", "Message data payload: " + remoteMessage.getData());
-            //Handle data payload here, for example:
-            String title = remoteMessage.getData().get("title");
-            String body = remoteMessage.getData().get("body");
+    private void showNotification(String title, String message) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.pet_app_logo) // Make sure this exists in drawable
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
 
-            if (title != null && body != null) {
-                notificationHandler.showNotification(title, body);
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        manager.notify((int) System.currentTimeMillis(), builder.build());
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel =
+                    new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription(CHANNEL_DESC);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
             }
         }
     }
@@ -48,9 +90,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String token) {
         Log.d("FCM", "Refreshed token: " + token);
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
-        // sendRegistrationToServer(token);  // Implement this method if needed.
+        // You can send this token to your backend if needed
     }
 }

@@ -31,6 +31,7 @@ import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.example.petcare.utility.ProgressDialogUtil;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -165,9 +166,12 @@ public class RegistrationActivity extends AppCompatActivity {
         Log.w("API_RESPONSE", "Registration API Called "+userRegisterRequest);
         ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
 
+        ProgressDialogUtil.showProgressBar(this, true);
+
         apiService.registerUser(userRegisterRequest).enqueue(new Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                ProgressDialogUtil.showProgressBar(RegistrationActivity.this, false);
                 if (response.isSuccessful()) {
                     Snackbar.make(findViewById(android.R.id.content), "Registration Successful", Snackbar.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
@@ -183,6 +187,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                ProgressDialogUtil.showProgressBar(RegistrationActivity.this, false);
                 Snackbar.make(findViewById(android.R.id.content), "Registration Failed", Snackbar.LENGTH_SHORT).show();
             }
         });

@@ -43,6 +43,11 @@
             android:textAppearance="@style/TextAppearance.App.Title"
             android:textColor="@color/primary_color"
             android:layout_marginBottom="8dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B0BEC5"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/petBreed"
@@ -50,6 +55,11 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.App.Body"
             android:textColor="@color/black"
+            android:layout_marginBottom="8dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B0BEC5"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -59,6 +69,11 @@
             android:textAppearance="@style/TextAppearance.App.Body"
             android:textColor="@color/black"
             android:layout_marginBottom="8dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B0BEC5"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/petWeight"
@@ -66,6 +81,11 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.App.Body"
             android:textColor="@color/black"
+            android:layout_marginBottom="8dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B0BEC5"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -75,4 +95,5 @@
             android:textAppearance="@style/TextAppearance.App.Body"
             android:textColor="@color/black" />
     </LinearLayout>
+
 </LinearLayout>

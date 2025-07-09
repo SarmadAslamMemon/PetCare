@@ -23,7 +23,9 @@
         app:navigationIconTint="@null"
         app:fabCradleRoundedCornerRadius="32dp"
         app:fabCradleVerticalOffset="6dp"
-        app:fabAlignmentMode="center">
+        app:fabAlignmentMode="center"
+        android:layout_marginBottom="-15dp"
+        android:paddingBottom="0dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -48,7 +50,7 @@
         app:backgroundTint="@color/primary_color"
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="24dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="0dp"
         app:tint="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

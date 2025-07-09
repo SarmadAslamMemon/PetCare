@@ -34,10 +34,16 @@ public class PredictionHelper {
     }
 
     public void predictFromText(String text, PredictionCallback callback) {
+        // Hardcoded Retrofit instance for ngrok URL
+        retrofit2.Retrofit ngrokRetrofit = new retrofit2.Retrofit.Builder()
+                .baseUrl("https://fe672a500e42.ngrok-free.app/")
+                .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
+                .build();
+        ApiService ngrokApiService = ngrokRetrofit.create(ApiService.class);
         TextInput input = new TextInput(text);
-        apiService.predictText(input).enqueue(new Callback<PredictionResponse>() {
+        ngrokApiService.predictText(input).enqueue(new retrofit2.Callback<PredictionResponse>() {
             @Override
-            public void onResponse(Call<PredictionResponse> call, Response<PredictionResponse> response) {
+            public void onResponse(retrofit2.Call<PredictionResponse> call, retrofit2.Response<PredictionResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onSuccess(response.body());
                 } else {
@@ -46,7 +52,7 @@ public class PredictionHelper {
             }
 
             @Override
-            public void onFailure(Call<PredictionResponse> call, Throwable t) {
+            public void onFailure(retrofit2.Call<PredictionResponse> call, Throwable t) {
                 callback.onError(t.getMessage());
             }
         });
@@ -58,9 +64,16 @@ public class PredictionHelper {
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
             MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-            apiService.predictImage(body).enqueue(new Callback<PredictionResponse>() {
+            // Hardcoded Retrofit instance for ngrok URL
+            retrofit2.Retrofit ngrokRetrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl("https://fe672a500e42.ngrok-free.app")
+                    .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
+                    .build();
+            ApiService ngrokApiService = ngrokRetrofit.create(ApiService.class);
+
+            ngrokApiService.predictImage(body).enqueue(new retrofit2.Callback<PredictionResponse>() {
                 @Override
-                public void onResponse(Call<PredictionResponse> call, Response<PredictionResponse> response) {
+                public void onResponse(retrofit2.Call<PredictionResponse> call, retrofit2.Response<PredictionResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         callback.onSuccess(response.body());
                     } else {
@@ -69,7 +82,7 @@ public class PredictionHelper {
                 }
 
                 @Override
-                public void onFailure(Call<PredictionResponse> call, Throwable t) {
+                public void onFailure(retrofit2.Call<PredictionResponse> call, Throwable t) {
                     callback.onError(t.getMessage());
                 }
             });

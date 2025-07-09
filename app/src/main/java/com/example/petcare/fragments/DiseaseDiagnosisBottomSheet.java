@@ -21,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -257,6 +258,7 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
         dialog.setContentView(R.layout.dialog_prediction_result);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+
         // ⚠️ Set full width
         Window window = dialog.getWindow();
         if (window != null) {
@@ -268,44 +270,50 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
         }
 
         LottieAnimationView lottieAnimation = dialog.findViewById(R.id.lottieAnimation);
-        TextView speciesText = dialog.findViewById(R.id.speciesText);
         TextView diseaseText = dialog.findViewById(R.id.diseaseText);
         Button okButton = dialog.findViewById(R.id.okButton);
-        Button consultButton = dialog.findViewById(R.id.consultButton);
+        ImageView speciesPetIcon = dialog.findViewById(R.id.speciesPetIcon);
 
-        // Set prediction results
-        StringBuilder speciesBuilder = new StringBuilder();
+        // Set pet icon based on selectedPetType
+        if (selectedPetType != null && !selectedPetType.isEmpty()) {
+            speciesPetIcon.setVisibility(View.VISIBLE);
+            switch (selectedPetType) {
+                case "Dog":
+                    speciesPetIcon.setImageResource(R.drawable.ic_dog_pet);
+                    break;
+                case "Cat":
+                    speciesPetIcon.setImageResource(R.drawable.ic_cat_pet);
+                    break;
+                case "Fish":
+                    speciesPetIcon.setImageResource(R.drawable.ic_fish_pet);
+                    break;
+                default:
+                    speciesPetIcon.setVisibility(View.GONE);
+                    break;
+            }
+        } else {
+            speciesPetIcon.setVisibility(View.GONE);
+        }
+
+        // Set only the disease result
         StringBuilder diseaseBuilder = new StringBuilder();
+        String selectedPrefix = selectedPetType != null ? selectedPetType.toLowerCase() : "";
 
         if (imagePredictionResponse != null) {
-            speciesBuilder.append("Image Analysis:\n");
-            speciesBuilder.append(String.format("Species: %s (%.2f%% confidence)\n\n",
-                    imagePredictionResponse.getSpecies(), imagePredictionResponse.getSpeciesConfidence() * 100));
-
+            String disease = imagePredictionResponse.getDisease();
+            if (disease != null && !selectedPrefix.isEmpty()) {
+                disease = correctDiseasePrefix(disease, selectedPrefix);
+            }
             diseaseBuilder.append("Image Analysis:\n");
             diseaseBuilder.append(String.format("Disease: %s (%.2f%% confidence)\n\n",
-                    imagePredictionResponse.getDisease(), imagePredictionResponse.getDiseaseConfidence() * 100));
+                    disease, imagePredictionResponse.getDiseaseConfidence() * 100));
         }
 
-        if (textPredictionResponse != null) {
-            speciesBuilder.append("Text Analysis:\n");
-            speciesBuilder.append(String.format("Species: %s (%.2f%% confidence)",
-                    textPredictionResponse.getSpecies(), textPredictionResponse.getSpeciesConfidence() * 100));
-
-            diseaseBuilder.append("Text Analysis:\n");
-            diseaseBuilder.append(String.format("Disease: %s (%.2f%% confidence)",
-                    textPredictionResponse.getDisease(), textPredictionResponse.getDiseaseConfidence() * 100));
-        }
-
-        speciesText.setText(speciesBuilder.toString());
         diseaseText.setText(diseaseBuilder.toString());
 
         // Set button click listeners
-        okButton.setOnClickListener(v -> dialog.dismiss());
-        consultButton.setOnClickListener(v -> {
-            dialog.dismiss();
-            navigateToConsultation();
-        });
+        okButton.setOnClickListener(v -> dismiss());
+
 
         dialog.show();
     }
@@ -356,5 +364,19 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
     private void launchCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraLauncher.launch(cameraIntent);
+    }
+
+    // Helper to correct the disease prefix based on selected pet
+    private String correctDiseasePrefix(String disease, String selectedPrefix) {
+        if (disease == null || selectedPrefix == null || selectedPrefix.isEmpty()) return disease;
+        // Replace any known prefix with the selected one
+        if (disease.startsWith("dog_")) {
+            return selectedPrefix + disease.substring(3);
+        } else if (disease.startsWith("cat_")) {
+            return selectedPrefix + disease.substring(3);
+        } else if (disease.startsWith("fish_")) {
+            return selectedPrefix + disease.substring(4);
+        }
+        return disease;
     }
 }

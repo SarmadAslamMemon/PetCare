@@ -1,6 +1,10 @@
 package com.example.petcare.modelclass;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PetFoodTime {
+    @SerializedName("id")
+    private int foodId; // 0 for new food time, > 0 for existing food time
     private int petId;
     private String favoriteFood;
     private String eatingTime1;
@@ -9,7 +13,8 @@ public class PetFoodTime {
     private String fcmToken;
     private String deviceId;
 
-    public PetFoodTime(int petId, String favoriteFood, String eatingTime1, String eatingTime2, String eatingTime3, String fcmToken, String deviceId) {
+    public PetFoodTime(int foodId, int petId, String favoriteFood, String eatingTime1, String eatingTime2, String eatingTime3, String fcmToken, String deviceId) {
+        this.foodId = foodId;
         this.petId = petId;
         this.favoriteFood = favoriteFood;
         this.eatingTime1 = eatingTime1;
@@ -20,6 +25,14 @@ public class PetFoodTime {
     }
 
     // Getters and Setters
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
+
     public int getPetId() {
         return petId;
     }

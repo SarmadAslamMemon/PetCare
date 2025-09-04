@@ -5,7 +5,8 @@ import com.example.petcare.modelclass.PredictionResponse;
 import com.example.petcare.modelclass.TextInput;
 import com.example.petcare.modelclass.UserRegisterRequest;
 import com.example.petcare.modelclass.PetFoodTime;
-import com.example.petcare.model.Blog;
+import com.example.petcare.modelclass.PetFoodTimeResponse;
+import com.example.petcare.network.model.Blog;
 import com.example.petcare.modelclass.Pet;
 import com.example.petcare.modelclass.User;
 import com.example.petcare.modelclass.BlogResponse;
@@ -54,10 +55,10 @@ public interface ApiService {
     Call<BlogListResponse> getAllBlogs();
 
     @Multipart
-    @POST("predict-image/")
+    @POST("/predict-image/")
     Call<PredictionResponse> predictImage(@Part MultipartBody.Part image);
 
-    @POST("predict-text/")
+    @POST("/predict-text/")
     Call<PredictionResponse> predictText(@Body TextInput textInput);
 
     @GET("pets/user/{userId}")
@@ -67,8 +68,6 @@ public interface ApiService {
     Call<ResponseBody> addPet(@Body Pet pet);
 
 
-
-
-
-
+    @GET("/food/times/{petId}")
+    Call<PetFoodTimeResponse> getPetFoodTimes(@Path("petId") int petId);
 }

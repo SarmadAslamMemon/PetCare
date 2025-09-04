@@ -1,5 +1,6 @@
 package com.example.petcare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.petcare.adapter.PetAdapter;
 import com.example.petcare.fragments.AddPetBottomSheet;
 import com.example.petcare.fragments.PetDetailsBottomSheet;
+import com.example.petcare.fragments.PetMealFragment;
 import com.example.petcare.modelclass.Pet;
 import com.example.petcare.network.ApiService;
 import com.example.petcare.network.RetrofitClient;
 import com.example.petcare.utility.SharePreference;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PetDetailsActivity extends AppCompatActivity implements PetAdapter.OnPetClickListener {
+public class PetDetailsActivity extends AppCompatActivity implements PetAdapter.OnPetClickListener, AddPetBottomSheet.OnPetAddedListener {
     private RecyclerView recyclerView;
     private PetAdapter adapter;
     private FloatingActionButton addPetButton;
@@ -50,6 +53,7 @@ public class PetDetailsActivity extends AppCompatActivity implements PetAdapter.
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
         );
         initViews();
+        setupToolbar();
         setupRecyclerView();
         loadPets();
     }
@@ -60,9 +64,15 @@ public class PetDetailsActivity extends AppCompatActivity implements PetAdapter.
 
         addPetButton.setOnClickListener(v -> {
             AddPetBottomSheet bottomSheet = new AddPetBottomSheet();
+            // Set the listener to refresh pets when a new pet is added
+            bottomSheet.listener = this;
             bottomSheet.show(getSupportFragmentManager(), "AddPetBottomSheet");
-
         });
+    }
+
+    private void setupToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void setupRecyclerView() {
@@ -104,5 +114,18 @@ public class PetDetailsActivity extends AppCompatActivity implements PetAdapter.
     public void onPetClick(Pet pet) {
         PetDetailsBottomSheet bottomSheet = PetDetailsBottomSheet.newInstance(pet);
         bottomSheet.show(getSupportFragmentManager(), "PetDetailsBottomSheet");
+    }
+
+    @Override
+    public void onEditMealTimeClick(Pet pet) {
+        Intent intent = new Intent(this, PetMealActivity.class);
+        intent.putExtra("pet", pet);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onPetAdded() {
+        // Refresh the pet list when a new pet is added
+        loadPets();
     }
 }

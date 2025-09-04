@@ -14,7 +14,7 @@ public class RetrofitClient {
 //    private static final String BASE_URL = "http://192.168.100.239:40870/";
     private static final String BASE_URL = "http://3.128.197.65:40870/";
 //  private static final String BASE_URL = "https://6c09-39-34-157-110.ngrok-free.app/";
-//   private static final String BASE_URL = "http://192.168.100.176:8000/";
+//   private static final String BASE_URL = "http://192.168.100.197:40870/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getInstance() {

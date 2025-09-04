@@ -39,6 +39,22 @@
                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
         </androidx.cardview.widget.CardView>
 
+        <!-- Camera Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cameraButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="Take Photo"
+            android:textColor="@color/primary_color"
+            app:icon="@drawable/ic_camera"
+            app:iconTint="@color/primary_color"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:cornerRadius="8dp" />
+
         <!-- Pet Type (Buttons instead of dropdown) -->
         <TextView
             android:layout_width="wrap_content"

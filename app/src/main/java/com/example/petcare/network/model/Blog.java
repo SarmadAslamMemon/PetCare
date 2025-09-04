@@ -1,4 +1,4 @@
-package com.example.petcare.model;
+package com.example.petcare.network.model;
 
 import com.example.petcare.modelclass.User;
 import com.google.gson.annotations.SerializedName;

@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.petcare.GeneralClass;
 import com.example.petcare.modelclass.HealthTip;
 import com.example.petcare.modelclass.Pet;
+import com.example.petcare.modelclass.PetFoodTime;
 import com.example.petcare.modelclass.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,6 +31,7 @@ public class SharePreference {
     private static final String PET_IMAGE = "pet_image";
     private static final String USER_PETS_LIST = "user_pets_list";
     private static final String PET_COUNT = "pet_count";
+    private static final String PET_FOOD_TIME_PREFIX = "pet_food_time_";
 
     // Private constructor to prevent instantiation
     public SharePreference(Context context) {
@@ -220,6 +222,43 @@ public class SharePreference {
             return user.getId();
         }
         return -1; // or 0 or throw exception depending on your logic
+    }
+
+    // Save food time data for a specific pet
+    public void savePetFoodTime(int petId, PetFoodTime foodTime) {
+        Gson gson = new Gson();
+        String json = gson.toJson(foodTime);
+        String key = PET_FOOD_TIME_PREFIX + petId;
+        editor.putString(key, json);
+        editor.apply();
+        Log.d("SharePreference", "Saved food time for pet " + petId + " with food ID: " + foodTime.getFoodId());
+    }
+
+    // Get food time data for a specific pet
+    public PetFoodTime getPetFoodTime(int petId) {
+        String key = PET_FOOD_TIME_PREFIX + petId;
+        String json = sharedPreferences.getString(key, null);
+        if (json != null) {
+            Gson gson = new Gson();
+            PetFoodTime foodTime = gson.fromJson(json, PetFoodTime.class);
+            Log.d("SharePreference", "Retrieved food time for pet " + petId + " with food ID: " + foodTime.getFoodId());
+            return foodTime;
+        }
+        return null;
+    }
+
+    // Remove food time data for a specific pet
+    public void removePetFoodTime(int petId) {
+        String key = PET_FOOD_TIME_PREFIX + petId;
+        editor.remove(key);
+        editor.apply();
+        Log.d("SharePreference", "Removed food time for pet " + petId);
+    }
+
+    // Check if food time exists for a pet
+    public boolean hasPetFoodTime(int petId) {
+        String key = PET_FOOD_TIME_PREFIX + petId;
+        return sharedPreferences.contains(key);
     }
 
 }

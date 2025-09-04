@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
+import android.os.Handler;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -81,10 +82,23 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
                             capturedImageView.setImageBitmap(photo);
                             imageUri = getImageUri(photo);
                             if (imageUri != null) {
-                                predictFromImage(imageUri);
+                                // Show success message and then start prediction
+                                Toast.makeText(requireContext(), "Image captured successfully! Analyzing...", Toast.LENGTH_SHORT).show();
+                                // Small delay to show the success message
+                                new Handler().postDelayed(() -> {
+                                    predictFromImage(imageUri);
+                                }, 1000);
+                            } else {
+                                Toast.makeText(requireContext(), "Failed to process image. Please try again.", Toast.LENGTH_SHORT).show();
                             }
+                        } else {
+                            Toast.makeText(requireContext(), "No image captured. Please try again.", Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        Toast.makeText(requireContext(), "Camera error occurred. Please try again.", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(requireContext(), "Image capture cancelled.", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -92,6 +106,12 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_disease_diagnosis_sheet, container, false);
+        
+        // Adjust for keyboard
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        }
+        
         predictionHelper = new PredictionHelper(requireContext());
         progressDialog = new ProgressDialog(requireContext());
         initViews(view);
@@ -112,9 +132,21 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
 
         });
 
+        // Show helpful tips for taking photos
+        showPhotoTips();
 
         return view;
     }
+
+    private void showPhotoTips() {
+        // Show a helpful Toast message with photo tips
+        if (isAdded()) {
+            Toast.makeText(requireContext(), 
+                "💡 Tip: Take a clear photo of your pet showing the affected area for better diagnosis", 
+                Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void selectPetType(String petType) {
         selectedPetType = petType;
         // Update breed dropdown
@@ -165,8 +197,10 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
         dogButton = view.findViewById(R.id.dogButton);
         catButton = view.findViewById(R.id.catButton);
         fishButton = view.findViewById(R.id.fishButton);
-//        resultTextView = view.findViewById(R.id.resultTextView);
+        MaterialButton cameraButton = view.findViewById(R.id.cameraButton);
+        
         diagnoseButton.setOnClickListener(v -> validateAndSubmit());
+        cameraButton.setOnClickListener(v -> launchCamera());
     }
 
 
@@ -206,7 +240,8 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
             return;
         }
 
-        // Show progress dialog
+        // Show progress dialog with appropriate message
+        progressDialog.setMessage("Analyzing symptoms...");
         progressDialog.show();
 
         // Concatenate the input for text prediction
@@ -219,13 +254,17 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onSuccess(PredictionResponse response) {
                 textPredictionResponse = response;
-                progressDialog.dismiss();
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
                 showPredictionDialog();
             }
 
             @Override
             public void onError(String message) {
-                progressDialog.dismiss();
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
                 if (isAdded()) {
                     Toast.makeText(requireContext(), "Error: " + message, Toast.LENGTH_SHORT).show();
                 }
@@ -234,22 +273,99 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void predictFromImage(Uri imageUri) {
+        progressDialog.setMessage("Analyzing image...");
         progressDialog.show();
+        
         predictionHelper.predictFromImage(imageUri, new PredictionHelper.PredictionCallback() {
             @Override
             public void onSuccess(PredictionResponse response) {
                 imagePredictionResponse = response;
-                progressDialog.dismiss();
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                // Show success message
+                if (isAdded()) {
+                    Toast.makeText(requireContext(), "Image analysis completed!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onError(String message) {
-                progressDialog.dismiss();
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                
                 if (isAdded()) {
-                    Toast.makeText(requireContext(), "Error: " + message, Toast.LENGTH_SHORT).show();
+                    // Check if this is the specific error about unrecognized image
+                    if (message.contains("Image is not recognized as a dog, cat, or fish") || 
+                        message.contains("400: Image is not recognized")) {
+                        
+                        // Show the error dialog instead of Toast
+                        showUnrecognizedImageError();
+                        
+                    } else {
+                        // Show regular error message
+                        Toast.makeText(requireContext(), "Error: " + message, Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
+    }
+
+    private void showProgressWithMessage(String message) {
+        if (progressDialog != null) {
+            progressDialog.setMessage(message);
+            if (!progressDialog.isShowing()) {
+                progressDialog.show();
+            }
+        }
+    }
+
+    private void showUnrecognizedImageError() {
+        Dialog errorDialog = new Dialog(requireContext());
+        errorDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        errorDialog.setContentView(R.layout.dialog_prediction_result);
+        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // Set full width
+        Window window = errorDialog.getWindow();
+        if (window != null) {
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(window.getAttributes());
+            layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(layoutParams);
+        }
+
+        LottieAnimationView lottieAnimation = errorDialog.findViewById(R.id.lottieAnimation);
+        TextView diseaseText = errorDialog.findViewById(R.id.diseaseText);
+        Button okButton = errorDialog.findViewById(R.id.okButton);
+        ImageView speciesPetIcon = errorDialog.findViewById(R.id.speciesPetIcon);
+
+        // Hide the pet icon for error dialog
+        speciesPetIcon.setVisibility(View.GONE);
+
+        // Set error message
+        diseaseText.setText("⚠️ Image Not Recognized\n\n" +
+                "The image you captured was not recognized as a dog, cat, or fish.\n\n" +
+                "Please ensure:\n" +
+                "• Your pet is clearly visible\n" +
+                "• Good lighting conditions\n" +
+                "• The image shows the affected area\n" +
+                "• No other objects are blocking the view");
+
+        // Set button text and click listener
+        okButton.setText("Take New Photo");
+        okButton.setOnClickListener(v -> {
+            errorDialog.dismiss();
+            // Clear the captured image
+            capturedImageView.setImageDrawable(null);
+            imageUri = null;
+            // Launch camera to take a new photo
+            launchCamera();
+        });
+
+        errorDialog.show();
     }
 
     private void showPredictionDialog() {
@@ -305,8 +421,24 @@ public class DiseaseDiagnosisBottomSheet extends BottomSheetDialogFragment {
                 disease = correctDiseasePrefix(disease, selectedPrefix);
             }
             diseaseBuilder.append("Image Analysis:\n");
-            diseaseBuilder.append(String.format("Disease: %s (%.2f%% confidence)\n\n",
-                    disease, imagePredictionResponse.getDiseaseConfidence() * 100));
+            diseaseBuilder.append(String.format("Disease: %s (%.2f%% accuracy)\n\n",
+                    disease, imagePredictionResponse.getAccuracy()));
+        }
+
+        if (textPredictionResponse != null) {
+            String disease = textPredictionResponse.getDisease();
+            if (disease != null && !selectedPrefix.isEmpty()) {
+                disease = correctDiseasePrefix(disease, selectedPrefix);
+            }
+            diseaseBuilder.append("Text Analysis:\n");
+            diseaseBuilder.append(String.format("Disease: %s (%.2f%% accuracy)\n\n",
+                    disease, textPredictionResponse.getAccuracy()));
+        }
+
+        // If no predictions available, show a message
+        if (diseaseBuilder.length() == 0) {
+            diseaseBuilder.append("No disease prediction available.\n");
+            diseaseBuilder.append("Please try again with different symptoms or image.");
         }
 
         diseaseText.setText(diseaseBuilder.toString());

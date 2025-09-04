@@ -18,7 +18,7 @@ public class ProgressDialogUtil {
     private static AlertDialog alertDialog;
 
     public static void showProgressBar(Context context, boolean toShow) {
-        if (!(context instanceof Activity) || ((Activity) context).isFinishing() || ((Activity) context).isDestroyed()) {
+        if (context == null || !(context instanceof Activity) || ((Activity) context).isFinishing() || ((Activity) context).isDestroyed()) {
             return; // Exit if context is not valid
         }
 
@@ -52,12 +52,33 @@ public class ProgressDialogUtil {
             }
 
             if (!alertDialog.isShowing()) {
-                alertDialog.show();
+                try {
+                    alertDialog.show();
+                } catch (Exception e) {
+                    // Handle any remaining edge cases where dialog cannot be shown
+                    e.printStackTrace();
+                }
             }
         } else {
             if (alertDialog != null && alertDialog.isShowing()) {
-                alertDialog.dismiss();
+                try {
+                    alertDialog.dismiss();
+                } catch (Exception e) {
+                    // Handle any remaining edge cases where dialog cannot be dismissed
+                    e.printStackTrace();
+                }
             }
         }
+    }
+    
+    public static void resetDialog() {
+        if (alertDialog != null && alertDialog.isShowing()) {
+            try {
+                alertDialog.dismiss();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        alertDialog = null;
     }
 }

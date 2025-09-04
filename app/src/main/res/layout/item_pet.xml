@@ -48,6 +48,16 @@
                 android:layout_marginTop="4dp"
                 android:textAppearance="@style/TextAppearance.App.Caption"
                 android:textColor="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editMealTimeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Edit Meal Time"
+                android:textColor="@color/primary_color"
+                app:cornerRadius="8dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView> 

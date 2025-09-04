@@ -8,6 +8,8 @@ import com.example.petcare.R
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.example.petcare.fragments.DiseaseDiagnosisBottomSheet
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MainDashboardFragment : Fragment(R.layout.fragment_dash_board) {
     private var handler: Handler? = null
@@ -62,8 +64,33 @@ class MainDashboardFragment : Fragment(R.layout.fragment_dash_board) {
                     }
                 }, 300)
             }
+
+            // Set click listeners for the cards
+            petCareCard?.setOnClickListener {
+                showDiseaseDiagnosis()
+            }
+
+            consultationCard?.setOnClickListener {
+                // Handle consultation card click
+                Log.d("MainDashboard", "Consultation card clicked")
+            }
+
+            healthTipsCard?.setOnClickListener {
+                // Handle health tips card click
+                Log.d("MainDashboard", "Health tips card clicked")
+            }
+
         } catch (e: Exception) {
             Log.e("MainDashboard", "Error in onViewCreated", e)
+        }
+    }
+
+    private fun showDiseaseDiagnosis() {
+        try {
+            val diseaseDiagnosisSheet = DiseaseDiagnosisBottomSheet.newInstance()
+            diseaseDiagnosisSheet.show(childFragmentManager, "DiseaseDiagnosis")
+        } catch (e: Exception) {
+            Log.e("MainDashboard", "Error showing disease diagnosis", e)
         }
     }
 

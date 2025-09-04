@@ -3,6 +3,7 @@ package com.example.petcare.fragments.consultion;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.view.WindowManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -23,7 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.petcare.R;
-import com.example.petcare.model.Blog;
+import com.example.petcare.network.model.Blog;
 import com.example.petcare.modelclass.BlogResponse;
 import com.example.petcare.network.ApiService;
 import com.example.petcare.network.RetrofitClient;
@@ -95,6 +95,12 @@ public class CreateBlogBottomSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_sheet_create_blog, container, false);
+        
+        // Adjust for keyboard
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        }
+        
         initViews(view);
         return view;
     }

@@ -19,10 +19,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
+import com.example.petcare.PetMealActivity;
 import com.example.petcare.R;
 import com.example.petcare.modelclass.Pet;
+import com.example.petcare.fragments.DiseaseDiagnosisBottomSheet;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.button.MaterialButton;
+import android.content.Intent;
 
 import java.io.Serializable;
 
@@ -100,18 +104,24 @@ public class PetDetailsBottomSheet extends BottomSheetDialogFragment {
                 petImage.setImageResource(categoryDrawableRes);
             }
 
-//            btnSetPetFoodTime.setOnClickListener(v -> {
-//                PetMealFragment fragment = new PetMealFragment();
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("pet", pet);
-//                fragment.setArguments(bundle);
-//                requireActivity().getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.petMealContainer, fragment)
-//                    .addToBackStack(null)
-//                    .commit();
-//                dismiss();
-//            });
+            // Set up button click handlers
+            MaterialButton btnAIDiseaseDetection = view.findViewById(R.id.btnAIDiseaseDetection);
+            MaterialButton btnSetPetFoodTime = view.findViewById(R.id.btnSetPetFoodTime);
+
+            btnAIDiseaseDetection.setOnClickListener(v -> {
+                // Open AI Disease Detection
+                DiseaseDiagnosisBottomSheet diseaseBottomSheet = DiseaseDiagnosisBottomSheet.newInstance();
+                diseaseBottomSheet.show(requireActivity().getSupportFragmentManager(), "DiseaseDiagnosisBottomSheet");
+                dismiss();
+            });
+
+            btnSetPetFoodTime.setOnClickListener(v -> {
+                // Open Pet Meal Activity with the selected pet
+                Intent intent = new Intent(requireContext(), PetMealActivity.class);
+                intent.putExtra("pet", pet);
+                startActivity(intent);
+                dismiss();
+            });
         }
 
         return view;

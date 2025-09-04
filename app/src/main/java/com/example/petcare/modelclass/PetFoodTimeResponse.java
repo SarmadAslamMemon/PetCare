@@ -1,10 +1,9 @@
 package com.example.petcare.modelclass;
 
-import com.example.petcare.network.model.Blog;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-public class BlogListResponse {
+public class PetFoodTimeResponse {
     @SerializedName("success")
     private boolean success;
 
@@ -12,17 +11,29 @@ public class BlogListResponse {
     private String message;
 
     @SerializedName("data")
-    private List<Blog> data;
+    private List<PetFoodTime> data;
 
     public boolean isSuccess() {
         return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public List<Blog> getData() {
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<PetFoodTime> getData() {
         return data;
+    }
+
+    public void setData(List<PetFoodTime> data) {
+        this.data = data;
     }
 } 

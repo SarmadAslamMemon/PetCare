@@ -6,24 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.petcare.GeneralClass;
 import com.example.petcare.R;
 import com.example.petcare.adapter.BlogAdapter;
-import com.example.petcare.model.Blog;
+import com.example.petcare.network.model.Blog;
 import com.example.petcare.modelclass.BlogListResponse;
 import com.example.petcare.network.ApiService;
 import com.example.petcare.network.RetrofitClient;
 import com.example.petcare.utility.SharePreference;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +38,9 @@ public class DashBoardFragment extends Fragment implements BlogAdapter.OnBlogCli
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        EdgeToEdge.enable(requireActivity());
         view = inflater.inflate(R.layout.maindashboard_fragment, container, false);
+
         navController = NavHostFragment.findNavController(this);
 
         findViews(view);

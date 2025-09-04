@@ -42,8 +42,6 @@ public class HealthTipFragment extends Fragment {
         topAppBar.setNavigationOnClickListener(v -> {
             requireActivity().onBackPressed();
         });
-        topAppBar.setTitle("Health Tips");
-        topAppBar.setTitleTextColor(getResources().getColor(R.color.white));
         return view;
     }
 

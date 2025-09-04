@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -18,12 +17,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.petcare.R;
 import com.example.petcare.adapter.BlogAdapter;
-import com.example.petcare.model.Blog;
+import com.example.petcare.network.model.Blog;
 import com.example.petcare.modelclass.BlogListResponse;
 import com.example.petcare.network.ApiService;
 import com.example.petcare.network.RetrofitClient;
 import com.example.petcare.utility.ProgressDialogUtil;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -33,16 +34,27 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddPetBottomSheet extends BottomSheetDialogFragment {
+    
+    public interface OnPetAddedListener {
+        void onPetAdded();
+    }
+    
     private EditText petNameEditText, petAgeEditText, petBreedEditText;
     private Button addPetButton;
     AutoCompleteTextView petCategoryEditText;
     private SharePreference sharePreference;
     private List<String> petCategory=new ArrayList<>();
+    public OnPetAddedListener listener;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_pet_sheet, container, false);
+        
+        // Adjust for keyboard
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        }
 
         sharePreference = new SharePreference(requireContext());
 
@@ -97,7 +109,10 @@ public class AddPetBottomSheet extends BottomSheetDialogFragment {
 
                             if (success) {
                                 dismiss();
-                                // Refresh pet list or update UI
+                                // Notify parent to refresh pet list
+                                if (listener != null) {
+                                    listener.onPetAdded();
+                                }
                             }
                         } catch (Exception e) {
                             Toast.makeText(requireContext(), "Error parsing response", Toast.LENGTH_SHORT).show();

@@ -25,18 +25,16 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.petcare.PetDetailsActivity;
 import com.example.petcare.R;
 import com.example.petcare.fragments.DiseaseDiagnosisBottomSheet;
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainDashBoardActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION_CODE = 100;
     private NavController navController;
-    private BottomAppBar bottomAppBar;
-    private FloatingActionButton fab;
     private BottomNavigationView bottomNavigationView;
-    private DiseaseDiagnosisBottomSheet diagnosisBottomSheet;
+    private MaterialCardView fab;
 
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -61,11 +59,9 @@ public class MainDashBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_dash_board);
         EdgeToEdge.enable(this);
 
-
         // Initialize views
-        bottomAppBar = findViewById(R.id.bottomAppBar);
-        fab = findViewById(R.id.fab);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        fab = findViewById(R.id.fab);
 
         // Set up NavController from NavHostFragment
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
@@ -159,7 +155,7 @@ public class MainDashBoardActivity extends AppCompatActivity {
     }
 
     private void showDiagnosisBottomSheetWithCamera() {
-        diagnosisBottomSheet = DiseaseDiagnosisBottomSheet.newInstance();
+        DiseaseDiagnosisBottomSheet diagnosisBottomSheet = DiseaseDiagnosisBottomSheet.newInstance();
         diagnosisBottomSheet.show(getSupportFragmentManager(), "diagnosis_sheet");
         diagnosisBottomSheet.openCamera();
     }

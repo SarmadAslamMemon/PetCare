@@ -21,6 +21,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
 
     public interface OnPetClickListener {
         void onPetClick(Pet pet);
+        void onEditMealTimeClick(Pet pet);
     }
 
     public PetAdapter(List<Pet> pets, OnPetClickListener listener) {
@@ -71,6 +72,17 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
                     listener.onPetClick(pets.get(position));
                 }
             });
+
+            // Edit Meal Time button
+            View editMealTimeButton = itemView.findViewById(R.id.editMealTimeButton);
+            if (editMealTimeButton != null) {
+                editMealTimeButton.setOnClickListener(v -> {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onEditMealTimeClick(pets.get(position));
+                    }
+                });
+            }
         }
 
         public void bind(Pet pet) {

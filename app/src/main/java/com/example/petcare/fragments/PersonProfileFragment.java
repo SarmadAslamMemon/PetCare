@@ -160,9 +160,7 @@ public class PersonProfileFragment extends Fragment {
             // Set user information in cards
             dataBinding.userNameEditText.setText(fullName);
             dataBinding.emailTextView.setText(user.getEmail());
-            dataBinding.phoneTextView.setText(
-                    user.getPhoneNumber() != null ? user.getPhoneNumber() : "+920302940349340"
-            );
+            dataBinding.phoneTextView.setText("1-May-2022");
             dataBinding.addressTextView.setText(user.getAddress());
 
             // Handle profile image

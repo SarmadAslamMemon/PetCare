@@ -17,11 +17,12 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@drawable/gradient_appbar"
             app:title="My Pets"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@drawable/ic_back"
             app:navigationIconTint="@color/white"
+            app:titleCentered="true"
             app:menu="@menu/pet_details_menu"/>
 
     </com.google.android.material.appbar.AppBarLayout>
